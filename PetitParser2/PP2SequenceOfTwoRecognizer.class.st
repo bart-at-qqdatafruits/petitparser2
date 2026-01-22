@@ -1,25 +1,27 @@
 Class {
-	#name : #PP2SequenceOfTwoRecognizer,
-	#superclass : #PP2Sequence,
+	#name : 'PP2SequenceOfTwoRecognizer',
+	#superclass : 'PP2Sequence',
 	#instVars : [
 		'firstChild',
 		'secondChild'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #transformation }
+{ #category : 'transformation' }
 PP2SequenceOfTwoRecognizer >> bypass: child to: target [
 	firstChild == child ifTrue: [ firstChild := target ].
 	secondChild == child ifTrue: [ secondChild := target ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2SequenceOfTwoRecognizer >> firstChild [
 	^ firstChild
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2SequenceOfTwoRecognizer >> initializeFor: aPP2SequenceNode [
 	super initializeFor: aPP2SequenceNode.
 	
@@ -27,7 +29,7 @@ PP2SequenceOfTwoRecognizer >> initializeFor: aPP2SequenceNode [
 	secondChild := aPP2SequenceNode secondChild.
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2SequenceOfTwoRecognizer >> parseOn: context [
 	| retval memento |
 	memento := self remember: context.
@@ -41,7 +43,7 @@ PP2SequenceOfTwoRecognizer >> parseOn: context [
 	].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2SequenceOfTwoRecognizer >> secondChild [
 	^ secondChild
 ]

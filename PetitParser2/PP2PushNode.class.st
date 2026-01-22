@@ -1,15 +1,17 @@
 Class {
-	#name : #PP2PushNode,
-	#superclass : #PP2CsNode,
-	#category : 'PetitParser2-Context'
+	#name : 'PP2PushNode',
+	#superclass : 'PP2CsNode',
+	#category : 'PetitParser2-Context',
+	#package : 'PetitParser2',
+	#tag : 'Context'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2PushNode >> accept: visitor [
 	^ visitor visitPush: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2PushNode >> resetStrategy [
 	strategy := PP2Push on: self
 ]

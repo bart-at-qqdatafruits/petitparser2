@@ -1,10 +1,12 @@
 Class {
-	#name : #PP2Pop,
-	#superclass : #PP2Strategy,
-	#category : 'PetitParser2-Context'
+	#name : 'PP2Pop',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Context',
+	#package : 'PetitParser2',
+	#tag : 'Context'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2Pop >> parseOn: context [
 	| retval |
 	retval := node child parseOn: context.

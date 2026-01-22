@@ -1,6 +1,6 @@
 Class {
-	#name : #PP2ExpressionGrammar,
-	#superclass : #PP2CompositeNode,
+	#name : 'PP2ExpressionGrammar',
+	#superclass : 'PP2CompositeNode',
 	#instVars : [
 		'terms',
 		'addition',
@@ -13,60 +13,62 @@ Class {
 		'plus',
 		'star'
 	],
-	#category : 'PetitParser2-Examples'
+	#category : 'PetitParser2-Examples',
+	#package : 'PetitParser2',
+	#tag : 'Examples'
 }
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 PP2ExpressionGrammar >> addition [
 	^ primary, plus trim, terms
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 PP2ExpressionGrammar >> closeBracket [
 	^ $) asPParser
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 PP2ExpressionGrammar >> multiplication [
 	^ primary, star trim, terms
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 PP2ExpressionGrammar >> number [
 	^ ($- asPParser optional , #digit asPParser plus , ($. asPParser, #digit asPParser plus) optional) flatten
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 PP2ExpressionGrammar >> openBracket [
 	^ $( asPParser
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 PP2ExpressionGrammar >> parentheses [
 	^ openBracket trim , terms , closeBracket trim
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 PP2ExpressionGrammar >> plus [
 	^ $+ asPParser
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 PP2ExpressionGrammar >> primary [
 	^ number / parentheses
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 PP2ExpressionGrammar >> star [
 	^ $* asPParser
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ExpressionGrammar >> start [
 	^ terms end
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 PP2ExpressionGrammar >> terms [
 	^ addition / multiplication / primary
 ]

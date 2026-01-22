@@ -5,42 +5,44 @@ Prevents repeated trimming in cases like:
 $a asPParser trim / $b asPParser trim parse: '    b   '
 "
 Class {
-	#name : #PP2TrimmingCache,
-	#superclass : #PP2WrappingStrategy,
+	#name : 'PP2TrimmingCache',
+	#superclass : 'PP2WrappingStrategy',
 	#instVars : [
 		'failure',
 		'lastTrimming'
 	],
-	#category : #'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2TrimmingCache >> cache [
 	"I already cache trimming, no need to add another layer of caches"
 	^ self
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2TrimmingCache >> cacheHit: context [
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2TrimmingCache >> initializeFor: aPP2Strategy [
 	super initializeFor: aPP2Strategy.
 	
 	failure := PP2Failure message: 'no more whitespace'
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2TrimmingCache >> invocation [
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2TrimmingCache >> isCache [
 	^ true
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2TrimmingCache >> parseOn: context [
 	| retval |
 	self invocation.
@@ -53,17 +55,17 @@ PP2TrimmingCache >> parseOn: context [
 	^ retval
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2TrimmingCache >> recording [
 	^ PP2RecordingTrimmingCache on: strategy
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2TrimmingCache >> reset [
 	lastTrimming := nil
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2TrimmingCache >> trimmingCache [
 	^ self
 ]

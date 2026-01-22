@@ -4,17 +4,19 @@ Matches string.
 'hello' asPParser parse: 'hello'
 "
 Class {
-	#name : #PP2LiteralSequenceNode,
-	#superclass : #PP2LiteralNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2LiteralSequenceNode',
+	#superclass : 'PP2LiteralNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2LiteralSequenceNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitLiteralSequence: self
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2LiteralSequenceNode >> caseInsensitive [
 	"Answer a parser that can parse the receiver case-insensitive."
 	
@@ -25,7 +27,7 @@ PP2LiteralSequenceNode >> caseInsensitive [
 		size: literal size
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2LiteralSequenceNode >> firstCharSet [
 	^ (literal = '') ifTrue: [ 
 		PP2CharSetPredicate any
@@ -34,17 +36,17 @@ PP2LiteralSequenceNode >> firstCharSet [
 	]
 ]
 
-{ #category : #'parsing - private' }
+{ #category : 'parsing - private' }
 PP2LiteralSequenceNode >> parseOn: aPP2Context [
 	^ strategy parseOn: aPP2Context 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2LiteralSequenceNode >> resetStrategy [
 	strategy := PP2LiteralSequence  on: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2LiteralSequenceNode >> size [
 	^ literal size
 ]

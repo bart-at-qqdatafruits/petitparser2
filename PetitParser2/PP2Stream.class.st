@@ -4,80 +4,82 @@ Basic stream used by PetitParser2. Any input passed to PP2Node>>parse is convert
 If PP2Stream is not suitable for your needs, consider using PP2BufferStream.
 "
 Class {
-	#name : #PP2Stream,
-	#superclass : #Object,
+	#name : 'PP2Stream',
+	#superclass : 'Object',
 	#instVars : [
 		'collection'
 	],
-	#category : #'PetitParser2-Streams'
+	#category : 'PetitParser2-Streams',
+	#package : 'PetitParser2',
+	#tag : 'Streams'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2Stream class >> new [
 	"for compatibility reasons"
 	^ self basicNew
 		initialize
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2Stream class >> on: collection [
 	^ self new
 		collection: collection;
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2Stream >> asPetit2Context [
 	^ PP2InMemoryContext on: self	collection
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2Stream >> asPetit2Stream [
 	^ self
 ]
 
-{ #category : #'context interface' }
+{ #category : 'context interface' }
 PP2Stream >> atEnd: position [
 	^ collection size <= position
 ]
 
-{ #category : #'context interface' }
+{ #category : 'context interface' }
 PP2Stream >> atPosition: position [
 	^ collection at: position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Stream >> collection [
 	^ collection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Stream >> collection: aCollection [
 	collection := aCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Stream >> contents [
 	^ collection copyFrom: 1 to: collection size
 ]
 
-{ #category : #'context interface' }
+{ #category : 'context interface' }
 PP2Stream >> copyFrom: start to: end [
 	"start - end should be in range <1, collection size> "
 	^ collection copyFrom: start to: end
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Stream >> initialize [
 	super initialize
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Stream >> isBuffered [
 	^ false
 ]
 
-{ #category : #tokenization }
+{ #category : 'tokenization' }
 PP2Stream >> newToken: tokenClass from: start to: stop [
 	^ tokenClass 
 		on: collection 
@@ -85,7 +87,7 @@ PP2Stream >> newToken: tokenClass from: start to: stop [
 		stop: 	stop
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2Stream >> printOn: writeStream position: position [
 	writeStream
 		nextPutAll: (collection copyFrom: 1 to: position);
@@ -93,7 +95,7 @@ PP2Stream >> printOn: writeStream position: position [
 		nextPutAll: (collection copyFrom: position + 1 to: collection size)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Stream >> reset [
 	
 ]

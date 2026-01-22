@@ -1,16 +1,18 @@
 Class {
-	#name : #PP2ContextMemoizationVisitor,
-	#superclass : #PP2NoopVisitor,
-	#category : 'PetitParser2-Optimizations'
+	#name : 'PP2ContextMemoizationVisitor',
+	#superclass : 'PP2NoopVisitor',
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2ContextMemoizationVisitor >> doPass: node [
 	^ self visit: node
 	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextMemoizationVisitor >> visitAnd: node [
 	node child contextChanges isNotContextChange ifTrue: [ 
 		node memoizationStrategy: PP2CFMemoization new.
@@ -31,7 +33,7 @@ PP2ContextMemoizationVisitor >> visitAnd: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextMemoizationVisitor >> visitFlatten: node [
 	node contextChanges isContextChange ifFalse: [ 
 		node memoizationStrategy: PP2CFMemoization new
@@ -41,7 +43,7 @@ PP2ContextMemoizationVisitor >> visitFlatten: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextMemoizationVisitor >> visitMatch: node [
 	node child contextChanges isNotContextChange ifTrue: [ 
 		node memoizationStrategy: PP2CFMemoization new
@@ -51,7 +53,7 @@ PP2ContextMemoizationVisitor >> visitMatch: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextMemoizationVisitor >> visitNonEpsilon: node [
 	node child contextChanges isNotContextChange ifTrue: [ 
 		node memoizationStrategy: PP2CFMemoization new.
@@ -62,7 +64,7 @@ PP2ContextMemoizationVisitor >> visitNonEpsilon: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextMemoizationVisitor >> visitNot: node [
 	node child contextChanges isNotContextChange ifTrue: [ 
 		node memoizationStrategy: PP2CFMemoization new.
@@ -83,7 +85,7 @@ PP2ContextMemoizationVisitor >> visitNot: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextMemoizationVisitor >> visitSea: node [
 	node contextChanges isContextChange ifFalse: [ 
 		node memoizationStrategy: PP2CFMemoization new
@@ -93,7 +95,7 @@ PP2ContextMemoizationVisitor >> visitSea: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextMemoizationVisitor >> visitSequence: node [
 	(node children noneSatisfy: [:child | child contextChanges isContextChange ]) ifTrue: [ 
 		node memoizationStrategy: PP2CFMemoization new.
@@ -123,7 +125,7 @@ PP2ContextMemoizationVisitor >> visitSequence: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextMemoizationVisitor >> visitWater: node [
 	node waterToken contextChanges isContextChange ifFalse: [ 
 		node memoizationStrategy: PP2CFMemoization new

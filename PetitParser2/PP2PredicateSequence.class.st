@@ -2,12 +2,14 @@
 Default strategy for PP2PredicateSequenceNode.
 "
 Class {
-	#name : #PP2PredicateSequence,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2PredicateSequence',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2PredicateSequence >> parseOn: aPP2Context [
 	| retval position |
 	position := aPP2Context rememberPosition.

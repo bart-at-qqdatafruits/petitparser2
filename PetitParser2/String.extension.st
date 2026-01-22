@@ -1,6 +1,6 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*petitparser2' }
+{ #category : '*petitparser2' }
 String >> asPParser [
 	"Answer a parser that accepts the receiving string."
 

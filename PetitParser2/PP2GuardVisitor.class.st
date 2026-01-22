@@ -1,14 +1,16 @@
 Class {
-	#name : #PP2GuardVisitor,
-	#superclass : #PP2NoopVisitor,
+	#name : 'PP2GuardVisitor',
+	#superclass : 'PP2NoopVisitor',
 	#instVars : [
 		'guarded',
 		'anythingClassification'
 	],
-	#category : 'PetitParser2-Optimizations'
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #support }
+{ #category : 'support' }
 PP2GuardVisitor >> classificationFor: node [
 	| classification charSet firstSet |
 	classification := Array new: 255 withAll: false.
@@ -27,12 +29,12 @@ PP2GuardVisitor >> classificationFor: node [
 	^ classification
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2GuardVisitor >> doPass: node [
 	self visit: node
 ]
 
-{ #category : #support }
+{ #category : 'support' }
 PP2GuardVisitor >> guardOf: classification makesSenseFor: node [
 	| size allNodesSize |
 	allNodesSize := node propertyAt: #allNodesSize ifAbsentPut: [ node allNodes size ].
@@ -56,7 +58,7 @@ PP2GuardVisitor >> guardOf: classification makesSenseFor: node [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2GuardVisitor >> initialize [
 	super initialize.
 	
@@ -65,12 +67,12 @@ PP2GuardVisitor >> initialize [
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2GuardVisitor >> isGuarded [
 	^ guarded isEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2GuardVisitor >> isWellGuarded: classification [
 	| topClassification changes |
 	topClassification := guarded top.
@@ -94,7 +96,7 @@ PP2GuardVisitor >> isWellGuarded: classification [
 	"
 ]
 
-{ #category : #support }
+{ #category : 'support' }
 PP2GuardVisitor >> visit: node guardedWith: classification [
 	guarded push: classification.
 	self visit: node.
@@ -102,7 +104,7 @@ PP2GuardVisitor >> visit: node guardedWith: classification [
 	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2GuardVisitor >> visitChoice: node [
 	| alternatives classification |
 
@@ -121,7 +123,7 @@ PP2GuardVisitor >> visitChoice: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2GuardVisitor >> visitDelegate: node [
 	| classification |
 	(node children size = 1) ifFalse: [ ^ super visitDelegate: node ].
@@ -135,7 +137,7 @@ PP2GuardVisitor >> visitDelegate: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2GuardVisitor >> visitOptional: node [
 	| classification |
 
@@ -152,7 +154,7 @@ PP2GuardVisitor >> visitOptional: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2GuardVisitor >> visitPossesiveRepeating: node [
 	| classification |
 	
@@ -165,7 +167,7 @@ PP2GuardVisitor >> visitPossesiveRepeating: node [
 	self visitUnguarded: node child
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2GuardVisitor >> visitSequence: node [
 	self visit: node firstChild.
 	
@@ -176,7 +178,7 @@ PP2GuardVisitor >> visitSequence: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2GuardVisitor >> visitTrimming: node [
 	| trimmerClassification topClassification childClassification |
 	trimmerClassification := self classificationFor: node trimmer.
@@ -200,7 +202,7 @@ PP2GuardVisitor >> visitTrimming: node [
 	self visit: node child guardedWith: topClassification
 ]
 
-{ #category : #support }
+{ #category : 'support' }
 PP2GuardVisitor >> visitUnguarded: node [
 	^ self visit: node guardedWith: anythingClassification 
 ]

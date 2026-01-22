@@ -2,18 +2,20 @@
 Abstract base for predicate nodes.
 "
 Class {
-	#name : #PP2PredicateNode,
-	#superclass : #PP2Node,
+	#name : 'PP2PredicateNode',
+	#superclass : 'PP2Node',
 	#instVars : [
 		'predicate',
 		'predicateMessage',
 		'negated',
 		'negatedMessage'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2PredicateNode class >> on: predicate message: message [
 	^ self new
 		predicate: predicate;
@@ -23,12 +25,12 @@ PP2PredicateNode class >> on: predicate message: message [
 		yourself
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2PredicateNode >> accept: aPP2ParserVisitor [
 	self subclassResponsibility
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2PredicateNode >> localEquals: anotherNode [
 	(super localEquals: anotherNode) ifFalse: [ ^ false ].
 	
@@ -37,12 +39,12 @@ PP2PredicateNode >> localEquals: anotherNode [
 	^ true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2PredicateNode >> localHash [
 	^ super localHash bitXor: (predicate printString hash bitXor: predicateMessage hash)
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2PredicateNode >> negate [
 	"Answer a parser that is the negation of the receiving predicate parser."
 	
@@ -53,47 +55,47 @@ PP2PredicateNode >> negate [
 		negatedMessage: predicateMessage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateNode >> negated [
 	^ negated
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateNode >> negated: anObject [
 	negated := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateNode >> negatedMessage [
 	^ negatedMessage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateNode >> negatedMessage: anObject [
 	negatedMessage := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateNode >> predicate [
 	^ predicate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateNode >> predicate: anObject [
 	predicate := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateNode >> predicateMessage [
 	^ predicateMessage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateNode >> predicateMessage: anObject [
 	predicateMessage := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2PredicateNode >> resetStrategy [
   self subclassResponsibility 
 ]

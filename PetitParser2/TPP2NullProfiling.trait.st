@@ -1,12 +1,14 @@
 Trait {
-	#name : #TPP2NullProfiling,
-	#category : 'PetitParser2-Strategies'
+	#name : 'TPP2NullProfiling',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 TPP2NullProfiling >> cacheHit: context [
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 TPP2NullProfiling >> invocation [
 ]

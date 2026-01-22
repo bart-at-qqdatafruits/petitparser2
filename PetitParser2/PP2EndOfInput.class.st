@@ -2,22 +2,24 @@
 Default strategy for PP2EndOfInputNode.
 "
 Class {
-	#name : #PP2EndOfInput,
-	#superclass : #PP2Strategy,
+	#name : 'PP2EndOfInput',
+	#superclass : 'PP2Strategy',
 	#instVars : [
 		'failure'
 	],
-	#category : #'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2EndOfInput >> initializeFor: aPP2Node [
 	super initializeFor: aPP2Node.
 	
 	failure := PP2Failure message: 'end of input expected'
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2EndOfInput >> parseOn: context [
 	^ context atEnd ifTrue: [ nil ] ifFalse: [ failure context: context ]
 ]

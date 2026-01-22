@@ -1,19 +1,21 @@
 Class {
-	#name : #PP2NotLiteralObject,
-	#superclass : #PP2Not,
+	#name : 'PP2NotLiteralObject',
+	#superclass : 'PP2Not',
 	#instVars : [
 		'literal'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2NotLiteralObject >> initializeFor: aNode [
 	super initializeFor: aNode.
 	literal := aNode child literal
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2NotLiteralObject >> parseOn: context [
 	^ (context peek == literal )
 		ifFalse: [ nil ] 

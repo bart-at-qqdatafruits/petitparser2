@@ -1,10 +1,12 @@
 Class {
-	#name : #PP2TrimmingCacheVisitor,
-	#superclass : #PP2NoopVisitor,
-	#category : 'PetitParser2-Optimizations'
+	#name : 'PP2TrimmingCacheVisitor',
+	#superclass : 'PP2NoopVisitor',
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2TrimmingCacheVisitor >> doPass: node [
 	self flag: 'should add a trimming guard for the equivalent trimmers'.
 	(self usingSameTrimmer: node) ifTrue: [ 
@@ -14,7 +16,7 @@ PP2TrimmingCacheVisitor >> doPass: node [
 	]
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2TrimmingCacheVisitor >> usingSameTrimmer: node [
 	| trimmings trimmers |
 	trimmings := node allNodes select: [ :c | c isTrimming ].
@@ -24,7 +26,7 @@ PP2TrimmingCacheVisitor >> usingSameTrimmer: node [
 	^ (Set withAll: trimmers) size = 1
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2TrimmingCacheVisitor >> visitTrimming: node [
 	node trimmer strategy: node trimmer strategy trimmingCache.
 	

@@ -2,15 +2,17 @@
 Represents unknown set of characters. For example, start of line node does not consume any character and therefore char set optimization cannot be used to quickly fail the parsing. See PP2CharSetPredicate.
 "
 Class {
-	#name : #PP2UnknownCharSetPredicate,
-	#superclass : #Object,
+	#name : 'PP2UnknownCharSetPredicate',
+	#superclass : 'Object',
 	#classInstVars : [
 		'instance'
 	],
-	#category : #'PetitParser2-Tools'
+	#category : 'PetitParser2-Tools',
+	#package : 'PetitParser2',
+	#tag : 'Tools'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2UnknownCharSetPredicate class >> instance [
 	instance isNil ifTrue: [ 
 		instance := PP2UnknownCharSetPredicate new
@@ -18,12 +20,12 @@ PP2UnknownCharSetPredicate class >> instance [
 	^ instance
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2UnknownCharSetPredicate >> isUnknown [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2UnknownCharSetPredicate >> value: aCharacter [
 	self error: 'I don''t know, sorry man :('
 ]

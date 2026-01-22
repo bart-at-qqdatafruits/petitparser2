@@ -1,6 +1,6 @@
-Extension { #name : #Array }
+Extension { #name : 'Array' }
 
-{ #category : #'*PetitParser2' }
+{ #category : '*PetitParser2' }
 Array >> asMapArgument [
 	^ self
 ]

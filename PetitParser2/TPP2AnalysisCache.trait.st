@@ -1,14 +1,16 @@
 Trait {
-	#name : #TPP2AnalysisCache,
-	#category : 'PetitParser2-Optimizations'
+	#name : 'TPP2AnalysisCache',
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 TPP2AnalysisCache >> afterAccept: ctx result: result [
 	ctx node propertyAt: self propertySymbol ifAbsentPut: result
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 TPP2AnalysisCache >> doPass: node [
 	| children child |
 	self visit: node.
@@ -20,7 +22,7 @@ TPP2AnalysisCache >> doPass: node [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TPP2AnalysisCache >> propertySymbol [
 	self explicitRequirement
 ]

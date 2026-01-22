@@ -2,56 +2,58 @@
 Silently consumes spaces before and after the delegate parser.
 "
 Class {
-	#name : #PP2TrimmingNode,
-	#superclass : #PP2DelegateNode,
+	#name : 'PP2TrimmingNode',
+	#superclass : 'PP2DelegateNode',
 	#instVars : [
 		'trimmer'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2TrimmingNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitTrimming: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TrimmingNode >> children [
 	^ Array with: trimmer with: child
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2TrimmingNode >> isTrimming [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2TrimmingNode >> isTrimmingToken [
 	^ self child isToken
 ]
 
-{ #category : #'parsing - private' }
+{ #category : 'parsing - private' }
 PP2TrimmingNode >> parseOn: aPP2Context [
 	^ strategy parseOn: aPP2Context 
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 PP2TrimmingNode >> replace: node with: anotherNode [
 	node == child ifTrue: [ child := anotherNode ].
 	node == trimmer ifTrue: [ trimmer := anotherNode ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2TrimmingNode >> resetStrategy [
 	strategy := PP2Trimming on: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TrimmingNode >> trimmer [
 	^ trimmer 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TrimmingNode >> trimmer: aPP2arser [
 	trimmer := aPP2arser
 ]

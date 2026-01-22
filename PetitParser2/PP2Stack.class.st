@@ -1,18 +1,20 @@
 Class {
-	#name : #PP2Stack,
-	#superclass : #Object,
+	#name : 'PP2Stack',
+	#superclass : 'Object',
 	#instVars : [
 		'elements'
 	],
-	#category : #'PetitParser2-Context'
+	#category : 'PetitParser2-Context',
+	#package : 'PetitParser2',
+	#tag : 'Context'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Stack class >> elementsCollection [
 	^ OrderedCollection new
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Stack >> = anotherStack [
 	(anotherStack isKindOf: PP2Stack) ifFalse: [  
 		^ false
@@ -21,12 +23,12 @@ PP2Stack >> = anotherStack [
 	^ anotherStack elements = elements 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Stack >> elements [
 	^ elements
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Stack >> equals: anotherStack [
 	(anotherStack isKindOf: PP2Stack) ifFalse: [  
 		^ false
@@ -35,24 +37,24 @@ PP2Stack >> equals: anotherStack [
 	^ anotherStack elements = elements 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Stack >> initialize [
 	super initialize.
 	
 	elements := PP2Stack elementsCollection.
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 PP2Stack >> isEmpty [
 	^ elements isEmpty 
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 PP2Stack >> pop [
 	^ elements removeLast
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 PP2Stack >> postCopy [
 	"JK: I am not sure, if this works properly for optimized version!"
 	super postCopy.
@@ -60,18 +62,18 @@ PP2Stack >> postCopy [
 	elements := elements copy.
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 PP2Stack >> push: element [
 	elements addLast: element.
 	^ element
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 PP2Stack >> size [
 	^ elements size
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 PP2Stack >> top [
 	^ elements last
 ]

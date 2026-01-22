@@ -10,8 +10,8 @@ is a sequence node (which knows how to parse sequence), while 'a' and 'b' are re
 Each PP2 node is visitable. Visitors are mainly used to implement optimizations and aditional analyses, but can be used for other purposes if needed. 
 "
 Class {
-	#name : #PP2Node,
-	#superclass : #Object,
+	#name : 'PP2Node',
+	#superclass : 'Object',
 	#traits : 'TPP2Properties',
 	#classTraits : 'TPP2Properties classTrait',
 	#instVars : [
@@ -22,34 +22,36 @@ Class {
 	#classInstVars : [
 		'spaceTrimmer'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2Node class >> named: aString [
 	^ self new name: aString
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2Node class >> new [
 	"for compatibility reasons with Smalltalk/X"
 	^ self basicNew 
 		initialize
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> , anotherParser [
 	^ PP2SequenceNode with: self with: anotherParser
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> / aParser [ 
 	"Answer a new parser that parses the receiver, if the receiver fails try with aParser (ordered-choice)."
 	
 	^ PP2ChoiceNode with: self with: aParser
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Node >> = anotherNode [
 	^ self equals: anotherNode visitedSet: IdentitySet new
 	
@@ -61,14 +63,14 @@ PP2Node >> = anotherNode [
 
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> ==> aBlock [
 	"Answer a new parser that performs aBlock as action handler on success."
 
 	^ PP2ActionNode on: self block: aBlock
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> >==> aBlock [
 	"
 		Make sure that the block does not perform any functional changes, otherwise all the optimizations break.
@@ -80,38 +82,38 @@ PP2Node >> >==> aBlock [
 		yourself
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> >=> aBlock [
 	"Answer a new parser that performs aBlock as action handler on success."
 
 	^ PP2WrappingNode on: self block: aBlock
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2Node >> accept: aPP2ParserVisitor [
 	self subclassResponsibility 
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> addParent: value [
 	self parents add: value
 ]
 
-{ #category : #'optimizations - warnings' }
+{ #category : 'optimizations - warnings' }
 PP2Node >> addWarning: warning [
 	self warnings add: warning.
 	
 	"Transcript crShow: warning"
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> allCaches [
 	^ self propertyAt: #allCaches ifAbsent: [
 		self collectCaches
 	]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 PP2Node >> allNodes [
 "	^ PP2ChildrenVisitor new visit: self"
 
@@ -122,12 +124,12 @@ PP2Node >> allNodes [
 	^ result
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 PP2Node >> allNodesDo: aBlock [
 	^ self allNodesDo: aBlock seen: IdentitySet new
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 PP2Node >> allNodesDo: aBlock seen: aSet [
 	"
 		Iterate over all the parse nodes of the receiver, do not visit the ones contained in aSet.
@@ -140,7 +142,7 @@ PP2Node >> allNodesDo: aBlock seen: aSet [
 	self children do: [ :each | each allNodesDo: aBlock seen: aSet ]
 ]
 
-{ #category : #'optimizations - warnings' }
+{ #category : 'optimizations - warnings' }
 PP2Node >> allWarnings [
 	| warnings |
 	warnings := Dictionary new.
@@ -150,17 +152,17 @@ PP2Node >> allWarnings [
 	^ warnings
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> and [
 	^ PP2AndNode on: self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2Node >> asPParser [
 	^ self
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Node >> changeStrategy: aPP2Strategy [
 	"
 		Contrary to the #strategy:, I do not assert the identity equivalence of the node.
@@ -171,17 +173,17 @@ PP2Node >> changeStrategy: aPP2Strategy [
 	strategy := aPP2Strategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> childAt: index [
 	^ self children at: index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> children [
 	^ #()
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Node >> childrenEqual: anotherNode visitedSet: visitedSet [
 	"
 		Invokes the comparison function on all children, while passing the visited
@@ -195,7 +197,7 @@ PP2Node >> childrenEqual: anotherNode visitedSet: visitedSet [
 	^ true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Node >> childrenHash: visitedSet [
 	| hash |
 	hash := '' hash.
@@ -205,7 +207,7 @@ PP2Node >> childrenHash: visitedSet [
 	^ hash
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> collectCaches [
 	| caches |
 	caches := IdentitySet new. 
@@ -214,45 +216,45 @@ PP2Node >> collectCaches [
 
 ]
 
-{ #category : #'analysis - context' }
+{ #category : 'analysis - context' }
 PP2Node >> contextChanges [
 	^ self propertyAt: #contextChanges ifAbsent: [  
 		PP2ContextChangesVisitor new visit: self
 	]
 ]
 
-{ #category : #'analysis - context' }
+{ #category : 'analysis - context' }
 PP2Node >> contextChanges: aPP2CaResult [
 	self assert: (aPP2CaResult isKindOf: PP2CcResult).
 	^ self propertyAt: #contextChanges put: aPP2CaResult
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> debug: input [
 	^ self 
 		enableDebug enableRecording 
 		parse: input withContext: PP2RecordingContext new
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 PP2Node >> debug: input withContext: startContext [
 	^ self enableDebug parse: input withContext: startContext
 
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 PP2Node >> debugAdaptableWithContext: context [
 	^ self enableDebug parseAdaptableWithContext: context
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> def: node [
 	"Redefine the receiver as the argument 'node'. This method is useful when defining recursive parsers: instantiate a PP2UnresolvedNode and later redefine it with another one."
 
 	^ self becomeForward: (node name: self name)
 ]
 
-{ #category : #'operators - convenience' }
+{ #category : 'operators - convenience' }
 PP2Node >> delimitedBy: aParser [
 	"Answer a new parser that parses the receiver one or more times, separated and possibly ended by aParser."
 	
@@ -262,24 +264,24 @@ PP2Node >> delimitedBy: aParser [
 			ifFalse: [ node first copyWith: node second ] ]
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> deoptimize [
 	self isOptimized ifFalse: [ ^ self ].
 	self allNodesDo: [ :node | node resetStrategies ].
 	self unsetOptimized.
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 PP2Node >> duplicate [
 	^ self transform: [ :node | node copy ]
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 PP2Node >> enableDebug [
 	self allNodesDo: [ :child | child strategy: child strategy debug ]
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 PP2Node >> enableRecording [
 	| parent |
 	self allNodesDo: [ :node | 
@@ -294,7 +296,7 @@ PP2Node >> enableRecording [
 
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> end [
 	"
 		$a asPParser end parse: 'a'.
@@ -304,7 +306,7 @@ PP2Node >> end [
 	^ PP2EndNode on: self
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Node >> equals: anotherNode visitedSet: visitedSet [
 	self == anotherNode ifTrue: [ ^ true ].
 	
@@ -321,33 +323,33 @@ PP2Node >> equals: anotherNode visitedSet: visitedSet [
 	^ true
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2Node >> firstProductionSet [
 	^ self propertyAt: #firstProductionSet ifAbsent: [
 		PP2FirstSetVisitor productionSet visit: self
 	]
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2Node >> firstSeasOrTerminalsSet [
 	^ self propertyAt: #firstSeasOrTerminals ifAbsent: [
 		PP2FirstSetVisitor seasOrTerminalsSet visit: self
 	]
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2Node >> firstSet [
 	^ self propertyAt: #firstSet ifAbsent: [
 		PP2FirstSetVisitor firstSet visit: self
 	]
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> flatten [
 	^ PP2FlattenNode on: self
 ]
 
-{ #category : #'operators - mapping' }
+{ #category : 'operators - mapping' }
 PP2Node >> foldLeft: aBlock [
 	"Answer a new parser that that folds the result of the receiver from left-to-right into aBlock. The argument aBlock must take two or more arguments."
 	
@@ -363,7 +365,7 @@ PP2Node >> foldLeft: aBlock [
 		args first ]
 ]
 
-{ #category : #'operators - mapping' }
+{ #category : 'operators - mapping' }
 PP2Node >> foldRight: aBlock [
 	"Answer a new parser that that folds the result of the receiver from right-to-left into aBlock. The argument aBlock must take two or more arguments."
 
@@ -379,22 +381,22 @@ PP2Node >> foldRight: aBlock [
 		args at: size ]
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> forbidCache [
 	^ self propertyAt: #cacheAllowed put: false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> hasName [
 	^ self name isNil not
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Node >> hash [
 	^ self hash: IdentitySet new
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Node >> hash: visitedSet [
 	"
 		Manages visited set in order to avoid inifinite loops, I don't see much reasons to
@@ -406,17 +408,17 @@ PP2Node >> hash: visitedSet [
 	^ self localHash bitXor: (self childrenHash: visitedSet)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Node >> initialize [
 	self resetStrategies
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isAdaptable [
 	^ false
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> isCacheForbidden [
 	(self hasProperty: #cacheAllowed) ifTrue: [ 
 		^ (self propertyAt: #cacheAllowed) not
@@ -424,54 +426,54 @@ PP2Node >> isCacheForbidden [
 	^ false
 ]
 
-{ #category : #'analysis - context' }
+{ #category : 'analysis - context' }
 PP2Node >> isContextFree [
 	^ self isContextSensitive not
 ]
 
-{ #category : #'analysis - context' }
+{ #category : 'analysis - context' }
 PP2Node >> isContextSensitive [
 	^ self propertyAt: #isContextSensitive ifAbsent: [  
 		PP2ContextSensitivityVisitor new visit: self
 	]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isDebugging [
 	^ self strategies anySatisfy: [ :s | s isDebugging ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isDelegate [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isEOI [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isEpsilon [
 	^ false
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2Node >> isFirstSetTerminal [
 	^ self isTerminal
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isJustDelegate [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isMemoized [
 	^ self strategies anySatisfy: [ :s | s isMemoized ]
 ]
 
-{ #category : #'analysis - abstract simulation' }
+{ #category : 'analysis - abstract simulation' }
 PP2Node >> isNullable [
 	"
 		I return true, if parser ALWAYS can accept epsilon and I NEVER fail.
@@ -483,62 +485,62 @@ PP2Node >> isNullable [
 	]
 ]
 
-{ #category : #'analysis - abstract simulation' }
+{ #category : 'analysis - abstract simulation' }
 PP2Node >> isNullable: aBoolean [
 	self propertyAt: #isNullable put: aBoolean
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> isOptimized [
 	^ self propertyAt: #optimized ifAbsent: false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isPetit2Parser [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isProduction [
 	^ self name notNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isRepeating [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isSea [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isTerminal [
 	^ self children isEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isToken [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isTrimming [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Node >> isTrimmingToken [
 	^ false
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> islandInSea [
 	^ self sea ==> #second
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Node >> localEquals: anotherNode [
 	"
 		This method is supposed to be overriden by children
@@ -557,7 +559,7 @@ PP2Node >> localEquals: anotherNode [
 	^ true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2Node >> localHash [
 	"
 		This method is supposed to be overriden by children
@@ -566,12 +568,12 @@ PP2Node >> localHash [
 	^ self class hash bitXor: self name hash
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> map: block [
 	^ PP2MappingNode on: self block: block
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> markNoRecognizer [
 	((self hasProperty: #recognizer) and: [ self propertyAt: #recognizer ]) ifTrue: [  
 		self warnShouldNotBeShared. 
@@ -579,7 +581,7 @@ PP2Node >> markNoRecognizer [
 	self propertyAt: #recognizer put: false
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> markRecognizer [
 	((self hasProperty: #recognizer) and: [ (self propertyAt: #recognizer) not ]) ifTrue: [  
 		self warnShouldNotBeShared. 
@@ -588,34 +590,34 @@ PP2Node >> markRecognizer [
 	self propertyAt: #recognizer ifAbsentPut: true
 ]
 
-{ #category : #'operators - context' }
+{ #category : 'operators - context' }
 PP2Node >> match [
 	^ PP2MatchNode on: self
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Node >> matches: anObject [
 	"Answer if anObject can be parsed by the receiver."
 	
 	^ (self parseContext: anObject) isPetit2Failure not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> memoizationStrategy [
 	^ memoizationStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> memoizationStrategy: anObject [
 	memoizationStrategy := anObject
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> memoize [
 	self propertyAt: #memoize put: true
 ]
 
-{ #category : #'operators - repeating' }
+{ #category : 'operators - repeating' }
 PP2Node >> min: aMinInteger max: aMaxInteger [
 	"Answer a new parser that parses the receiver at least aMinInteger and at most aMaxInteger times."
 	
@@ -625,31 +627,31 @@ PP2Node >> min: aMinInteger max: aMaxInteger [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> name [
 	"Answer the production name of the receiver."
 	
 	^ self propertyAt: #name ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> name: aString [
 	self propertyAt: #name put: aString
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> negate [
 	"Answer a new parser consumes any input token but the receiver."
 	
 	^ self not , #any asPParser ==> #second
 ]
 
-{ #category : #'analysis - next' }
+{ #category : 'analysis - next' }
 PP2Node >> nextSetIn: root [
 	^ root nextSets at: self
 ]
 
-{ #category : #'analysis - next' }
+{ #category : 'analysis - next' }
 PP2Node >> nextSets [
 	^ self propertyAt: #nextSets ifAbsent: [  
 		(PP2NextSetsVisitor new )
@@ -658,17 +660,17 @@ PP2Node >> nextSets [
 	]
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> nonEpsilon [
 	^ PP2NonEpsilonNode on: self
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> not [
 	^ PP2NotNode on: self
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> optimize [
 	self isOptimized ifTrue: [ ^ self ].
 	
@@ -718,27 +720,27 @@ PP2Node >> optimize [
 	self setOptimized.
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> optional [
 	^ PP2OptionalNode on: self
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> parent: value [
 	self parents add: value
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> parents [
 	^ self propertyAt: #parents ifAbsentPut: [ OrderedCollection new ]
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Node >> parse: input [
 	^ (self parseContext: input) returnValue
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Node >> parse: anObject onError: aBlock [
 	"Parse anObject with the receiving parser and answer the parse-result or answer the result of evaluating aBlock. Depending on the number of arguments of the block it is simply evaluated, evaluated with the failure object, or evaluated with the error message and position."
 	
@@ -751,18 +753,18 @@ PP2Node >> parse: anObject onError: aBlock [
 	^ aBlock value: result message value: result position
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Node >> parse: input withContext: startContext [
 	^ self parseAdaptable: input withContext: startContext
 
 ]
 
-{ #category : #'parsing - adaptable' }
+{ #category : 'parsing - adaptable' }
 PP2Node >> parseAdaptable: input [
 	^ self parseAdaptableWithContext: input asPetit2Stream asPetit2Context
 ]
 
-{ #category : #'parsing - adaptable' }
+{ #category : 'parsing - adaptable' }
 PP2Node >> parseAdaptable: input withContext: context [
 	context stream: input asPetit2Stream.
 	context position: 0.
@@ -773,7 +775,7 @@ PP2Node >> parseAdaptable: input withContext: context [
 
 ]
 
-{ #category : #'parsing - adaptable' }
+{ #category : 'parsing - adaptable' }
 PP2Node >> parseAdaptableWithContext: context [
 	| returnValue |
 	context parser: self.
@@ -791,35 +793,35 @@ PP2Node >> parseAdaptableWithContext: context [
 	]
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Node >> parseContext: input [
 	^ self parseAdaptable: input
 ]
 
-{ #category : #'parsing - adaptable' }
+{ #category : 'parsing - adaptable' }
 PP2Node >> parseOn: context [
 	^ strategy parseOn: context 
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Node >> parseWithContext: startContext [
 	^ self parseAdaptableWithContext: startContext
 
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> plus [
 	^ (PP2PossesiveRepeatingNode on: self)
 		min: 1;
 		yourself
 ]
 
-{ #category : #'operators - context' }
+{ #category : 'operators - context' }
 PP2Node >> pop [
 	^ PP2PopNode on: self
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 PP2Node >> postCopy [
 	"JK: I am not sure, if this works properly for optimized version!"
 	super postCopy.
@@ -829,7 +831,7 @@ PP2Node >> postCopy [
 	strategy node: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2Node >> printOn: aStream [
 	super printOn: aStream.
 	
@@ -843,90 +845,90 @@ PP2Node >> printOn: aStream [
 	]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2Node >> properties [
 	^ properties
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2Node >> properties: anObject [
 	^ properties := anObject 
 ]
 
-{ #category : #'operators - context' }
+{ #category : 'operators - context' }
 PP2Node >> push [
 	^ PP2PushNode on: self
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> recognizer [
 	^ self propertyAt: #recognizer
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> refreshCaches [
 	^ self propertyAt: #allCaches put: self collectCaches
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> reparsable [
 	self propertyAt: #reparsable put: true
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 PP2Node >> replace: node with: anotherNode [
 	"Replace the references of the receiver pointing to aParser with anotherParser."
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> resetCaches [
 	self isOptimized ifFalse: [ ^ self ].
 	self allCaches do: [ :cache | cache reset ].
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Node >> resetMemoizationStrategy [
 	memoizationStrategy := PP2CSMemoization new
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> resetNonReparsableCaches [
 	self isOptimized ifFalse: [ ^ self ].
 	self allCaches reject: [:e | e isReparsable ] thenDo: [ :cache | cache reset ].
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Node >> resetStrategies [
 	self resetStrategy.
 	self resetMemoizationStrategy.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Node >> resetStrategy [
 	self subclassResponsibility
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> sea [
 	^ PP2SeaNode on: self
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> sea: waterToken [
 	^ (PP2SeaNode on: self)
 		waterToken: waterToken;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> selfSkipDelegate [
 	^ self isJustDelegate ifTrue: [  self child ] ifFalse: [	^ self ]
 
 ]
 
-{ #category : #'operators - convenience' }
+{ #category : 'operators - convenience' }
 PP2Node >> separatedBy: aParser [
 	"Answer a new parser that parses the receiver one or more times, separated by aParser."
 	
@@ -939,29 +941,29 @@ PP2Node >> separatedBy: aParser [
 		result ]
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> setOptimized [
 	^ self allNodesDo: [ :node | node propertyAt: #optimized put: true ]
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> shouldCache [
 	^ self propertyAt: #cacheAllowed ifAbsent: [ ^ false ]
 ]
 
-{ #category : #'optimizations - caching' }
+{ #category : 'optimizations - caching' }
 PP2Node >> shouldMemoize [
 	^ self propertyAt: #memoize ifAbsent: false
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> star [
 	^ (PP2PossesiveRepeatingNode on: self)
 		min: 0;
 		yourself
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> starLazy [
 	^ ((#epsilon asPParser sea)
 		waterToken: self)
@@ -971,29 +973,29 @@ PP2Node >> starLazy [
 	] 
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> starLazy: predicate [
 	^ (predicate not, self) star
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> strategies [
 	^ strategy allChildren
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> strategy [
 	^ strategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> strategy: aPP2Strategy [
 	(strategy == aPP2Strategy) ifTrue: [ ^ self ].
 	self assert: aPP2Strategy node == self.
 	strategy := aPP2Strategy
 ]
 
-{ #category : #recording }
+{ #category : 'recording' }
 PP2Node >> switchToRecording: toBeSwitched parent: nodeOrStrategy [
 	| recordingStrategy |
 	recordingStrategy := toBeSwitched recording.
@@ -1003,7 +1005,7 @@ PP2Node >> switchToRecording: toBeSwitched parent: nodeOrStrategy [
 	^ recordingStrategy 
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> times: anInteger [
 	"Answer a new parser that parses the receiver exactly anInteger times."
 	
@@ -1013,24 +1015,24 @@ PP2Node >> times: anInteger [
 		yourself
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> token [
 	^ PP2CreateTokenNode on: self
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> token: tokenClass [
 	^ (PP2CreateTokenNode on: self)
 		tokenClass: tokenClass;
 		yourself
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 PP2Node >> transform: aBlock [
 	^ self transform: aBlock suchThat: [ :node | true ]
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 PP2Node >> transform: aBlock suchThat: predicate [
 	^ PP2TransformVisitor new
 		block: aBlock;
@@ -1038,14 +1040,14 @@ PP2Node >> transform: aBlock suchThat: predicate [
 		visit: self
 ]
 
-{ #category : #'operators-trimming' }
+{ #category : 'operators-trimming' }
 PP2Node >> trim [
 	"Answer a new parser that consumes spaces before and after the receiving parser."
 	
 	^ self trimSpaces
 ]
 
-{ #category : #'operators-trimming' }
+{ #category : 'operators-trimming' }
 PP2Node >> trim: aParser [
 	"Answer a new parser that consumes and ignores aParser repeatedly before and after the receiving parser."
 	
@@ -1054,54 +1056,54 @@ PP2Node >> trim: aParser [
 		yourself
 ]
 
-{ #category : #'operators-trimming' }
+{ #category : 'operators-trimming' }
 PP2Node >> trimBlanks [
 	"Answer a new parser that consumes spaces before and after the receiving parser."
 	
 	^ self trim: #blank asPParser star
 ]
 
-{ #category : #'operators-trimming' }
+{ #category : 'operators-trimming' }
 PP2Node >> trimLeft [
 	"Answer a new parser that consumes spaces before and after the receiving parser."
 	
 	^ self trimSpacesLeft
 ]
 
-{ #category : #'operators-trimming' }
+{ #category : 'operators-trimming' }
 PP2Node >> trimRight [
 	"Answer a new parser that consumes spaces before and after the receiving parser."
 	
 	^ self trimSpacesRight
 ]
 
-{ #category : #'operators-trimming' }
+{ #category : 'operators-trimming' }
 PP2Node >> trimSpaces [
 	"Answer a new parser that consumes spaces before and after the receiving parser."
 	
 	^ self trim: #space asPParser star
 ]
 
-{ #category : #'operators-trimming' }
+{ #category : 'operators-trimming' }
 PP2Node >> trimSpacesLeft [
 	"Answer a new parser that consumes spaces before the receiving parser."
 	
 	^ (#space asPParser star, self) ==> #second
 ]
 
-{ #category : #'operators-trimming' }
+{ #category : 'operators-trimming' }
 PP2Node >> trimSpacesRight [
 	"Answer a new parser that consumes spaces after the receiving parser."
 	
 	^ (self, #space asPParser star) ==> #first
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2Node >> unsetOptimized [
 	^ self allNodesDo: [ :node | node propertyAt: #optimized put: false ]
 ]
 
-{ #category : #'optimizations - warnings' }
+{ #category : 'optimizations - warnings' }
 PP2Node >> warnActionInToken [
 	"
 		(($a asParser2, $b asParser2) ==> [ :e | e second ] token) optimize
@@ -1113,12 +1115,12 @@ PP2Node >> warnActionInToken [
 
 ]
 
-{ #category : #'optimizations - warnings' }
+{ #category : 'optimizations - warnings' }
 PP2Node >> warnDifferentTrimmer [
 	"give user feedback about this issues"
 ]
 
-{ #category : #'optimizations - warnings' }
+{ #category : 'optimizations - warnings' }
 PP2Node >> warnShouldNotBeShared [
 	"give user feedback about this issues"
 	| warning |
@@ -1127,17 +1129,17 @@ PP2Node >> warnShouldNotBeShared [
 
 ]
 
-{ #category : #'optimizations - warnings' }
+{ #category : 'optimizations - warnings' }
 PP2Node >> warnings [
 	^ self propertyAt: #warnings ifAbsentPut: [ OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Node >> withoutDebugStrategy [
 	^ strategy withoutDebugStrategy
 ]
 
-{ #category : #'operators - convenience' }
+{ #category : 'operators - convenience' }
 PP2Node >> withoutSeparators [
 	"Filters out the separators from a parse result produced by one of the productions #delimitedBy: or #separatedBy:."
 	
@@ -1148,12 +1150,12 @@ PP2Node >> withoutSeparators [
 		result ]
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> wrapped [
 	^ PP2DelegateNode on: self
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2Node >> | aParser [
 	"Answer a new parser that either parses the receiver or aParser. Fail if both pass or fail (exclusive choice, unordered choice)."
 

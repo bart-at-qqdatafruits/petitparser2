@@ -6,15 +6,17 @@ Example:
 #hex asPParser
 "
 Class {
-	#name : #PP2NodeFactory,
-	#superclass : #Object,
+	#name : 'PP2NodeFactory',
+	#superclass : 'Object',
 	#classInstVars : [
 		'Instance'
 	],
-	#category : #'PetitParser2-Core'
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NodeFactory class >> instance [
 	Instance isNil ifTrue: [  
 		Instance := PP2NodeFactory new
@@ -23,12 +25,12 @@ PP2NodeFactory class >> instance [
 	^ Instance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NodeFactory class >> reset [
 	Instance := nil
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 PP2NodeFactory >> any [
 	^ PP2PredicateObjectNode new
 		predicate: [ :each | true ];
@@ -39,7 +41,7 @@ PP2NodeFactory >> any [
 
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 PP2NodeFactory >> blank [
 	| collection |
 	collection := OrderedCollection with: Character space with: Character tab.
@@ -51,7 +53,7 @@ PP2NodeFactory >> blank [
 		yourself
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 PP2NodeFactory >> digit [
 	^ PP2PredicateObjectNode new
 		predicate: (PP2CharSetPredicate on: [ :char | char isDigit ]);
@@ -61,32 +63,32 @@ PP2NodeFactory >> digit [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2NodeFactory >> endOfInput [
 	^ PP2EndOfInputNode new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2NodeFactory >> endOfLine [
 	^ PP2EndOfLineNode new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2NodeFactory >> eoi [
 	^ PP2EndOfInputNode new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2NodeFactory >> epsilon [
 	^ PP2EpsilonNode instance
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2NodeFactory >> failure [
 	^ PP2FailingNode new
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 PP2NodeFactory >> hex [
 	| hexBlock |
 	hexBlock := [ :char | (char between: $0 and: $9) 
@@ -101,7 +103,7 @@ PP2NodeFactory >> hex [
 		yourself
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 PP2NodeFactory >> letter [
 	^ PP2PredicateObjectNode new
 		predicate: (PP2CharSetPredicate on: [ :char | char isLetter ]);
@@ -111,17 +113,17 @@ PP2NodeFactory >> letter [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2NodeFactory >> newline [
 	^ PP2NewLineNode new
 ]
 
-{ #category : #context }
+{ #category : 'context' }
 PP2NodeFactory >> pop [
 	^ nil asPParser pop
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 PP2NodeFactory >> space [
 	^ PP2PredicateObjectNode new 
 		predicate: (PP2CharSetPredicate on: [ :char | char isSeparator ]);
@@ -131,17 +133,17 @@ PP2NodeFactory >> space [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2NodeFactory >> startOfLine [
 	^ PP2StartOfLineNode new
 ]
 
-{ #category : #seas }
+{ #category : 'seas' }
 PP2NodeFactory >> water [
 	^ nil asPParser sea flatten
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 PP2NodeFactory >> word [
 	^ PP2PredicateObjectNode new
 		predicate: (PP2CharSetPredicate on: [ :char | char isAlphaNumeric ]);

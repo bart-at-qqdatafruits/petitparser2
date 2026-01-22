@@ -1,20 +1,22 @@
 Class {
-	#name : #PP2CFMemoization,
-	#superclass : #PP2Memoization,
-	#category : 'PetitParser2-Context'
+	#name : 'PP2CFMemoization',
+	#superclass : 'PP2Memoization',
+	#category : 'PetitParser2-Context',
+	#package : 'PetitParser2',
+	#tag : 'Context'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2CFMemoization >> isContextFree [
 	^ true
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2CFMemoization >> remember: context [
 	^ context rememberPosition 
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2CFMemoization >> restore: context from: memento [
 	context restorePosition: memento
 ]

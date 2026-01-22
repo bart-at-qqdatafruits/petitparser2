@@ -2,12 +2,14 @@
 Default strategy for PP2EndNode.
 "
 Class {
-	#name : #PP2End,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2End',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2End >> parseOn: aPP2Context [
 	| memento retval |
 	memento := aPP2Context remember.

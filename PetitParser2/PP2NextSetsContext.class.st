@@ -1,13 +1,15 @@
 Class {
-	#name : #PP2NextSetsContext,
-	#superclass : #PP2NoopContext,
+	#name : 'PP2NextSetsContext',
+	#superclass : 'PP2NoopContext',
 	#instVars : [
 		'currentNext'
 	],
-	#category : 'PetitParser2-Analysis'
+	#category : 'PetitParser2-Analysis',
+	#package : 'PetitParser2',
+	#tag : 'Analysis'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2NextSetsContext >> = anotherContext [
 	super = anotherContext ifFalse: [ ^ false ].
 	
@@ -19,18 +21,18 @@ PP2NextSetsContext >> = anotherContext [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NextSetsContext >> currentNext [
 	^ currentNext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NextSetsContext >> currentNext: anObject [
 	self assert: [ anObject class == IdentitySet ] description: 'if not, override the #hash and #='.
 	currentNext := anObject
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2NextSetsContext >> hash [
 	| hash |
 	hash := super hash.

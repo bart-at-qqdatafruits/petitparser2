@@ -7,27 +7,29 @@ $a asPParser / $b asPParser parse: 'b'
 $a asPParser / $b asPParser parse: 'c'
 "
 Class {
-	#name : #PP2ChoiceNode,
-	#superclass : #PP2ListNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2ChoiceNode',
+	#superclass : 'PP2ListNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2ChoiceNode >> / aRule [ 
 	^ self copyWith: aRule
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ChoiceNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitChoice: self
 ]
 
-{ #category : #'parsing - private' }
+{ #category : 'parsing - private' }
 PP2ChoiceNode >> parseOn: aPP2Context [
 	^ strategy parseOn: aPP2Context 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2ChoiceNode >> resetStrategy [
 	strategy := PP2Choice on: self
 ]

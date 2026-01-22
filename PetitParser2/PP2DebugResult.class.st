@@ -1,6 +1,6 @@
 Class {
-	#name : #PP2DebugResult,
-	#superclass : #Object,
+	#name : 'PP2DebugResult',
+	#superclass : 'Object',
 	#traits : 'TPP2Debuggable',
 	#classTraits : 'TPP2Debuggable classTrait',
 	#instVars : [
@@ -15,10 +15,12 @@ Class {
 		'furthestPosition',
 		'invocationEntry'
 	],
-	#category : 'PetitParser2-Debug'
+	#category : 'PetitParser2-Debug',
+	#package : 'PetitParser2',
+	#tag : 'Debug'
 }
 
-{ #category : #analysis }
+{ #category : 'analysis' }
 PP2DebugResult >> allResults [
 	^ allChildren ifNil: [  
 		| collection |
@@ -29,57 +31,57 @@ PP2DebugResult >> allResults [
 
 ]
 
-{ #category : #analysis }
+{ #category : 'analysis' }
 PP2DebugResult >> allResultsTo: set [
 	set add: self.
 	self children do: [ :child | child allResultsTo: set ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> children [
 	^ children
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> children: anObject [
 	children := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> contents [
 	^ self findContextContents
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> context [
 	
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> context: anObject [
 	
 	context := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> debugResult [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> findContext [
 	
 	context ifNil: [ ^ parent ifNotNil: [ parent findContext ] ].
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> findContextContents [
 	^ (self findContext ifNotNil: [ :s | s contents ]) ifNil: [ '' ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2DebugResult >> formattedText [
 	self result isPetit2Failure ifTrue: [ 
 		^ Text string: self printString attribute: TextColor gray 
@@ -92,60 +94,60 @@ PP2DebugResult >> formattedText [
 	^ self printString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> furthestPosition [
 	^ furthestPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> furthestPosition: anObject [
 	furthestPosition := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2DebugResult >> initialize [ 
 	children := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> invocationEntry [
 	self flag: 'JK: I don''t like the cyclic dependency between debug result and profiling info. Is there a better architecture for this?'.
 	
 	^ invocationEntry
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> invocationEntry: entry [
 	invocationEntry := entry
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2DebugResult >> isBiggestChild [
 	parent isNil ifTrue: [ ^ false ].
 	^ (parent children sort: [ :c1 :c2 | c1 allResults size > c2 allResults size ]) first == self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> parent [
 	^ parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> parent: anObject [
 	parent := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> parser [
 	^ parser
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> parser: anObject [
 	parser := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2DebugResult >> printOn: aStream [ 
 	self parser ifNil: [ ^ super printOn: aStream ].
 	aStream 
@@ -163,44 +165,44 @@ PP2DebugResult >> printOn: aStream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> result [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> result: anObject [
 	result := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> start [
 	^ start
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> start: anObject [
 	start := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> startStopInterval [
 	(start isNil or: [stop isNil]) ifTrue: [ ^ 1 to: 0 ].
 	
 	^ start to: stop 
 ]
 
-{ #category : #analysis }
+{ #category : 'analysis' }
 PP2DebugResult >> steps [
 	^ self allResults size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> stop [
 	^ stop
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResult >> stop: anObject [
 	stop := anObject
 ]

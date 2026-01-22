@@ -2,12 +2,14 @@
 Default strategy for PP2NotNode.
 "
 Class {
-	#name : #PP2Not,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2Not',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Not >> parseOn: context [
 	| memento retval |
 	memento := self remember: context.

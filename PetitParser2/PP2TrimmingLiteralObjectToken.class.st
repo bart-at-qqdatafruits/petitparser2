@@ -1,14 +1,16 @@
 Class {
-	#name : #PP2TrimmingLiteralObjectToken,
-	#superclass : #PP2TrimmingToken,
+	#name : 'PP2TrimmingLiteralObjectToken',
+	#superclass : 'PP2TrimmingToken',
 	#instVars : [
 		'literal',
 		'failure'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2TrimmingLiteralObjectToken >> initializeFor: aNode [
 	| token |
 	super initializeFor: aNode.
@@ -19,12 +21,12 @@ PP2TrimmingLiteralObjectToken >> initializeFor: aNode [
 	failure := PP2Failure message: 'literal expected'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2TrimmingLiteralObjectToken >> literal [
 	^ literal
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2TrimmingLiteralObjectToken >> parseOn: context [
 	| position retval |
 	position := context rememberPosition.

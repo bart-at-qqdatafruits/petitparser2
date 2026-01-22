@@ -1,25 +1,27 @@
 Class {
-	#name : #PP2SequenceOfTwo,
-	#superclass : #PP2Sequence,
+	#name : 'PP2SequenceOfTwo',
+	#superclass : 'PP2Sequence',
 	#instVars : [
 		'firstChild',
 		'secondChild'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #transformation }
+{ #category : 'transformation' }
 PP2SequenceOfTwo >> bypass: child to: target [
 	firstChild == child ifTrue: [ firstChild := target ].
 	secondChild == child ifTrue: [ secondChild := target ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2SequenceOfTwo >> firstChild [
 	^ firstChild
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2SequenceOfTwo >> initializeFor: aPP2SequenceNode [
 	super initializeFor: aPP2SequenceNode.
 	
@@ -27,7 +29,7 @@ PP2SequenceOfTwo >> initializeFor: aPP2SequenceNode [
 	secondChild := aPP2SequenceNode secondChild.
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2SequenceOfTwo >> parseOn: context [
 	| retval elements memento |
 	memento := self remember: context.
@@ -46,12 +48,12 @@ PP2SequenceOfTwo >> parseOn: context [
 	^ elements
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2SequenceOfTwo >> recognizer [
 	^ PP2SequenceOfTwoRecognizer on: self node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2SequenceOfTwo >> secondChild [
 	^ secondChild
 ]

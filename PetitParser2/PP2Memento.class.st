@@ -2,52 +2,54 @@
 Memento pattern used by bounded seas.
 "
 Class {
-	#name : #PP2Memento,
-	#superclass : #Object,
+	#name : 'PP2Memento',
+	#superclass : 'Object',
 	#instVars : [
 		'returnValue',
 		'contextMemento',
 		'furthestPosition'
 	],
-	#category : #'PetitParser2-Core'
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Memento >> contextMemento [
 	^ contextMemento
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Memento >> contextMemento: anObject [
 	contextMemento := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Memento >> furthestPosition [
 	^ furthestPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Memento >> furthestPosition: anObject [
 	furthestPosition := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Memento >> isPromise [
 	^ false
 ]
 
-{ #category : #resolving }
+{ #category : 'resolving' }
 PP2Memento >> resolveFor: parser in: context [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Memento >> returnValue [
 	^ returnValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Memento >> returnValue: anObject [
 	returnValue := anObject
 ]

@@ -4,17 +4,19 @@ Gives an information if a given node does not change a context, pushes, pops, or
 - To override the behavior, set the #contextChanges  property.
 "
 Class {
-	#name : #PP2ContextChangesVisitor,
-	#superclass : #PP2NoopVisitor,
-	#category : 'PetitParser2-Analysis'
+	#name : 'PP2ContextChangesVisitor',
+	#superclass : 'PP2NoopVisitor',
+	#category : 'PetitParser2-Analysis',
+	#package : 'PetitParser2',
+	#tag : 'Analysis'
 }
 
-{ #category : #'loop control' }
+{ #category : 'loop control' }
 PP2ContextChangesVisitor >> openedResultFor: context [
 	^ PP2CcResult noChange 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> sequenceResult: node [
 	| childrenResult pushes pops |
 	childrenResult := node children collect: [ :child | self visit: child ].
@@ -47,26 +49,26 @@ PP2ContextChangesVisitor >> sequenceResult: node [
 	self error: 'should happen?'.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitAction: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitAdaptable: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange change
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitAnd: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitChoice: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		| results |
@@ -77,100 +79,100 @@ PP2ContextChangesVisitor >> visitChoice: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitComposite: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitDelegate: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		self visit: node child
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitEnd: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitEndOfInput: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitEndOfLine: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitEpsilon: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitFailing: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitFlatten: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitLiteralObject: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcResult noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitLiteralSequence: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitMapping: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitMatch: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitNewLine: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitNonEpsilon: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitNot: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitOptional: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		| result |
@@ -184,7 +186,7 @@ PP2ContextChangesVisitor >> visitOptional: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitPP2Node: node [
 	"
 		If you see this, you have probably added your own parser. 
@@ -198,14 +200,14 @@ PP2ContextChangesVisitor >> visitPP2Node: node [
 	self error: 'should provide specific implementation, it is usually easy!'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitPluggable: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		^ PP2CcChange change
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitPop: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		(self visit: node child) isContextChange ifFalse: [
@@ -216,7 +218,7 @@ PP2ContextChangesVisitor >> visitPop: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitPossesiveRepeating: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		| result |
@@ -230,21 +232,21 @@ PP2ContextChangesVisitor >> visitPossesiveRepeating: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitPredicateObject: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitPredicateSequence: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitPush: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		(self visit: node child) isContextChange ifFalse: [
@@ -255,7 +257,7 @@ PP2ContextChangesVisitor >> visitPush: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitSea: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		"
@@ -268,26 +270,26 @@ PP2ContextChangesVisitor >> visitSea: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitSequence: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		self sequenceResult: node
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitStartOfLine: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		PP2CcChange noChange 
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitToken: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitTrimming: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		self assert: (self visit: node trimmer) isContextChange not.
@@ -295,7 +297,7 @@ PP2ContextChangesVisitor >> visitTrimming: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitWater: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		self assert: (self visit: node waterToken) isContextChange not.
@@ -304,7 +306,7 @@ PP2ContextChangesVisitor >> visitWater: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextChangesVisitor >> visitWrapping: node [
 	^ node propertyAt: #contextChanges ifAbsent: [ 
 		^ PP2CcChange change

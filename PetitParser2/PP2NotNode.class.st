@@ -2,32 +2,34 @@
 The not-predicate, a parser that succeeds whenever its delegate does not, but consumes no input [Parr 1994, 1995].
 "
 Class {
-	#name : #PP2NotNode,
-	#superclass : #PP2DelegateNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2NotNode',
+	#superclass : 'PP2DelegateNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2NotNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitNot: self
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2NotNode >> firstCharSet [
 	^ PP2UnknownCharSetPredicate instance
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2NotNode >> isFirstSetTerminal [
 	^ true
 ]
 
-{ #category : #'parsing - private' }
+{ #category : 'parsing - private' }
 PP2NotNode >> parseOn: aPP2Context [
 	^ strategy parseOn: aPP2Context 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2NotNode >> resetStrategy [
 	strategy := PP2Not on: self
 ]

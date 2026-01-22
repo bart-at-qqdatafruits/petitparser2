@@ -1,20 +1,22 @@
 Class {
-	#name : #PP2CcChange,
-	#superclass : #PP2CcResult,
-	#category : 'PetitParser2-Analysis'
+	#name : 'PP2CcChange',
+	#superclass : 'PP2CcResult',
+	#category : 'PetitParser2-Analysis',
+	#package : 'PetitParser2',
+	#tag : 'Analysis'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2CcChange >> isContextChange [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2CcChange >> isNotContextChange [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2CcChange >> isUnknownChange [
 	^ true
 ]

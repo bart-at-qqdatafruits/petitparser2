@@ -1,12 +1,14 @@
 Class {
-	#name : #PP2FirstSetCache,
-	#superclass : #PP2FirstSetVisitor,
+	#name : 'PP2FirstSetCache',
+	#superclass : 'PP2FirstSetVisitor',
 	#traits : 'TPP2AnalysisCache',
 	#classTraits : 'TPP2AnalysisCache classTrait',
-	#category : 'PetitParser2-Optimizations'
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2FirstSetCache >> doPass: node [
 	| children child |
 	self visit: node.
@@ -18,7 +20,7 @@ PP2FirstSetCache >> doPass: node [
 	]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2FirstSetCache >> propertySymbol [
 	^ #firstSet
 ]

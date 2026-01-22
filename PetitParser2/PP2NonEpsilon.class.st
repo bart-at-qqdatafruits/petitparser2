@@ -2,12 +2,14 @@
 Default strategy for PP2NonEpsilonNode.
 "
 Class {
-	#name : #PP2NonEpsilon,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2NonEpsilon',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2NonEpsilon >> parseOn: context [
 	| start memento retval |
 	memento := self remember: context.

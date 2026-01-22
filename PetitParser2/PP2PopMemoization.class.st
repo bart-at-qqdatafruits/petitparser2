@@ -1,10 +1,12 @@
 Class {
-	#name : #PP2PopMemoization,
-	#superclass : #PP2Memoization,
-	#category : 'PetitParser2-Context'
+	#name : 'PP2PopMemoization',
+	#superclass : 'PP2Memoization',
+	#category : 'PetitParser2-Context',
+	#package : 'PetitParser2',
+	#tag : 'Context'
 }
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2PopMemoization >> remember: context [
 	"TODO JK: make it working with other than default stacks"
 	^ PP2PopMemento new 
@@ -15,7 +17,7 @@ PP2PopMemoization >> remember: context [
 	
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2PopMemoization >> restore: context from: memento [
 	context restorePosition: memento position.
 	context defaultStack size < memento stackSize ifTrue: [ 	

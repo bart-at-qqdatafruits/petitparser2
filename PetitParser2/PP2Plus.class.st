@@ -1,31 +1,33 @@
 Class {
-	#name : #PP2Plus,
-	#superclass : #PP2PossesiveRepeating,
+	#name : 'PP2Plus',
+	#superclass : 'PP2PossesiveRepeating',
 	#instVars : [
 		'child'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Plus >> bypass: aChild to: target [
 	self assert: aChild == child.
 	
 	child := target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Plus >> child [
 	^ child
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Plus >> initializeFor: aNode [
 	super initializeFor: aNode.
 	child := aNode child
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Plus >> parseOn: aPP2Context [
 	| elements retval |
 	
@@ -41,7 +43,7 @@ PP2Plus >> parseOn: aPP2Context [
 	^ elements
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2Plus >> recognizer [
 	^ PP2PlusRecognizer on: self node
 ]

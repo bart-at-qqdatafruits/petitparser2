@@ -1,37 +1,39 @@
 Class {
-	#name : #PP2RecordingMemoizedSea,
-	#superclass : #PP2MemoizedSea,
+	#name : 'PP2RecordingMemoizedSea',
+	#superclass : 'PP2MemoizedSea',
 	#traits : 'TPP2RecordingCache',
 	#classTraits : 'TPP2RecordingCache classTrait',
 	#instVars : [
 		'invocations',
 		'hits'
 	],
-	#category : 'PetitParser2-Recording'
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2RecordingMemoizedSea >> hits [
 	^ hits
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2RecordingMemoizedSea >> hits: anInteger [
 	hits := anInteger
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2RecordingMemoizedSea >> initialize [
 	super initialize.
 	self resetCounters.
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2RecordingMemoizedSea >> invocations [
 	^ invocations
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2RecordingMemoizedSea >> invocations: anInteger [
 	invocations := anInteger
 ]

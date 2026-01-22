@@ -1,15 +1,17 @@
 Class {
-	#name : #PP2ContextSensitivityVisitor,
-	#superclass : #PP2NoopVisitor,
-	#category : 'PetitParser2-Analysis'
+	#name : 'PP2ContextSensitivityVisitor',
+	#superclass : 'PP2NoopVisitor',
+	#category : 'PetitParser2-Analysis',
+	#package : 'PetitParser2',
+	#tag : 'Analysis'
 }
 
-{ #category : #'loop control' }
+{ #category : 'loop control' }
 PP2ContextSensitivityVisitor >> openedResultFor: context [
 	^ false
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextSensitivityVisitor >> sequenceResult: node [
 	| pushes matches pushIndex matchIndices childrenResult |
 	childrenResult := node children collect: [ :child | child -> (self  visit: child) ].
@@ -37,21 +39,21 @@ PP2ContextSensitivityVisitor >> sequenceResult: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextSensitivityVisitor >> visitMatch: node [
 	^ node propertyAt: #isContextSensitive ifAbsent: [ 
 		true
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextSensitivityVisitor >> visitPP2Node: node [
 	^ node propertyAt: #isContextSensitive ifAbsent: [ 
 		node children anySatisfy: [:child | self visit: child ]
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextSensitivityVisitor >> visitSequence: node [
 	^ node propertyAt: #isContextSensitive ifAbsent: [ 
 		super visitSequence: node.
@@ -59,7 +61,7 @@ PP2ContextSensitivityVisitor >> visitSequence: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ContextSensitivityVisitor >> visitTerminal: node [
 	^ node propertyAt: #isContextSensitive ifAbsent: [ 
 		false

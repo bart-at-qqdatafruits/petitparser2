@@ -2,12 +2,14 @@
 Default strategy for PP2TCreateToken.
 "
 Class {
-	#name : #PP2CreateToken,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2CreateToken',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2CreateToken >> parseOn: aPP2Context [
 	| start retval |
 	start := aPP2Context position.

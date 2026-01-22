@@ -1,14 +1,16 @@
 Class {
-	#name : #PP2RecognizerVisitor,
-	#superclass : #PP2NoopVisitor,
+	#name : 'PP2RecognizerVisitor',
+	#superclass : 'PP2NoopVisitor',
 	#instVars : [
 		'inToken',
 		'parents'
 	],
-	#category : 'PetitParser2-Optimizations'
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #support }
+{ #category : 'support' }
 PP2RecognizerVisitor >> changeStrategies: node [
 	node allNodesDo: [ :child | 
 		self assert: (child hasProperty: #recognizer).
@@ -18,7 +20,7 @@ PP2RecognizerVisitor >> changeStrategies: node [
 	]
 ]
 
-{ #category : #caching }
+{ #category : 'caching' }
 PP2RecognizerVisitor >> context: node [
 	^ PP2RecognizerContext new
 		node: node;
@@ -27,25 +29,25 @@ PP2RecognizerVisitor >> context: node [
 		yourself
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2RecognizerVisitor >> doPass: node [
 	self visit: node.
 	self changeStrategies: node	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2RecognizerVisitor >> inToken [
 	^ inToken top
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2RecognizerVisitor >> initialize [
 	super initialize.
 	
 	inToken := Stack with: false
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2RecognizerVisitor >> markNode: node [
 	self inToken ifTrue: [  
 		node markRecognizer.
@@ -54,17 +56,17 @@ PP2RecognizerVisitor >> markNode: node [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecognizerVisitor >> parentsFor: node [
 	^ parents at: node ifAbsentPut: [ IdentitySet new ]
 ]
 
-{ #category : #caching }
+{ #category : 'caching' }
 PP2RecognizerVisitor >> rootContext [
 	^ PP2RecognizerContext new
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2RecognizerVisitor >> visitAction: node [
 	self inToken ifTrue: [  
 		node warnActionInToken.
@@ -76,20 +78,20 @@ PP2RecognizerVisitor >> visitAction: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2RecognizerVisitor >> visitFlatten: node [
 	self markNode: node.
 	self visitRecognizer: node child
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2RecognizerVisitor >> visitPP2Node: node [
 	self markNode: node.
 	
 	super visitPP2Node: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2RecognizerVisitor >> visitRecognizer: node [
 
 	inToken push: true.
@@ -97,13 +99,13 @@ PP2RecognizerVisitor >> visitRecognizer: node [
 	inToken pop
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2RecognizerVisitor >> visitToken: node [
 	self markNode: node.
 	self visitRecognizer: node child
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2RecognizerVisitor >> visitTrimming: node [
 	self markNode: node.
 	self visitRecognizer: node trimmer.

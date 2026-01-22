@@ -1,31 +1,33 @@
 Class {
-	#name : #PP2Star,
-	#superclass : #PP2PossesiveRepeating,
+	#name : 'PP2Star',
+	#superclass : 'PP2PossesiveRepeating',
 	#instVars : [
 		'child'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 PP2Star >> bypass: aChild to: target [
 	self assert: aChild == child.
 	
 	child := target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Star >> child [
 	^ child
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Star >> initializeFor: aNode [
 	super initializeFor: aNode.
 	child := aNode child
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Star >> parseOn: aPP2Context [
 	| elements retval |
 	elements := OrderedCollection new.
@@ -38,14 +40,14 @@ PP2Star >> parseOn: aPP2Context [
 	^ elements
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2Star >> parsingGuard: classification [
 	^ (super parsingGuard: classification)
 		retval: #();
 		yourself
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2Star >> recognizer [
 	^ PP2StarRecognizer on: self node
 ]

@@ -7,22 +7,24 @@ Example:
 
 "
 Class {
-	#name : #PP2NewLineNode,
-	#superclass : #PP2Node,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2NewLineNode',
+	#superclass : 'PP2Node',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2NewLineNode >> accept: visitor [
 	^ visitor visitNewLine: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NewLineNode >> firstCharSet [
 	^ PP2CharSetPredicate on: [ :e | e = Character cr or: [ e = Character lf ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2NewLineNode >> resetStrategy [
 	strategy := PP2NewLine on: self
 ]

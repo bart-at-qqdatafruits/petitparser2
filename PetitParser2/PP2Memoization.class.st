@@ -1,15 +1,17 @@
 Class {
-	#name : #PP2Memoization,
-	#superclass : #Object,
-	#category : 'PetitParser2-Context'
+	#name : 'PP2Memoization',
+	#superclass : 'Object',
+	#category : 'PetitParser2-Context',
+	#package : 'PetitParser2',
+	#tag : 'Context'
 }
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Memoization >> remember: context [
 	self subclassResponsibility 
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Memoization >> restore: context from: memento [
 	self subclassResponsibility 
 ]

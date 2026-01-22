@@ -11,16 +11,18 @@ Can be used to convert Zinc byte streams:
 Call #asPetit2Stream to convert to the interface accepted by PP2Node>>parse:
 "
 Class {
-	#name : #PP2CharacterStream,
-	#superclass : #Stream,
+	#name : 'PP2CharacterStream',
+	#superclass : 'Stream',
 	#instVars : [
 		'stream',
 		'encoder'
 	],
-	#category : #'PetitParser2-Streams'
+	#category : 'PetitParser2-Streams',
+	#package : 'PetitParser2',
+	#tag : 'Streams'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2CharacterStream class >> on: stream encoder: encoder [
 	^ (self basicNew initialize)
 		stream: stream;
@@ -28,32 +30,32 @@ PP2CharacterStream class >> on: stream encoder: encoder [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2CharacterStream >> atEnd [
 	^ stream atEnd
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2CharacterStream >> encoder [
 	^ encoder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2CharacterStream >> encoder: anObject [
 	encoder := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2CharacterStream >> next [
 	^ (encoder nextCodePointFromStream: stream) asCharacter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2CharacterStream >> stream [
 	^ stream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2CharacterStream >> stream: anObject [
 	stream := anObject
 ]

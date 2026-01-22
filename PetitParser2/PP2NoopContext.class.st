@@ -1,23 +1,25 @@
 Class {
-	#name : #PP2NoopContext,
-	#superclass : #Object,
+	#name : 'PP2NoopContext',
+	#superclass : 'Object',
 	#traits : 'TPP2Properties',
 	#classTraits : 'TPP2Properties classTrait',
 	#instVars : [
 		'node',
 		'properties'
 	],
-	#category : 'PetitParser2-Core'
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2NoopContext class >> with: node [
 	^ (self new)
 		node: node;
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2NoopContext >> = anotherContext [
 	self class == anotherContext class ifFalse: [ ^ false ].
 	self node == anotherContext node ifFalse: [ ^ false ].
@@ -25,32 +27,32 @@ PP2NoopContext >> = anotherContext [
 	^ self properties = anotherContext properties
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2NoopContext >> hash [
 	^ self node identityHash bitXor: (self properties hash)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2NoopContext >> initialize [
 	super initialize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NoopContext >> node [
 	^ node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NoopContext >> node: anObject [
 	node := anObject
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2NoopContext >> properties [
 	^ properties
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2NoopContext >> properties: anObject [
 	^ properties := anObject 
 ]

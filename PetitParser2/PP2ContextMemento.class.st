@@ -2,8 +2,8 @@
 Remembers the state of the context.
 "
 Class {
-	#name : #PP2ContextMemento,
-	#superclass : #Object,
+	#name : 'PP2ContextMemento',
+	#superclass : 'Object',
 	#traits : 'TPP2Properties',
 	#classTraits : 'TPP2Properties classTrait',
 	#instVars : [
@@ -11,24 +11,26 @@ Class {
 		'position',
 		'properties'
 	],
-	#category : #'PetitParser2-Core'
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PP2ContextMemento >> + anInteger [
 	^ (self copy)
 		position: position + anInteger;
 		yourself
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PP2ContextMemento >> - anInteger [
 	^ (self copy)
 		position: position - anInteger;
 		yourself
 ]
 
-{ #category : #comparison }
+{ #category : 'comparison' }
 PP2ContextMemento >> = anotherMemento [
 	self class == anotherMemento class ifFalse: [ ^ false ].
 	
@@ -38,42 +40,42 @@ PP2ContextMemento >> = anotherMemento [
 	^ self properties = anotherMemento properties
 ]
 
-{ #category : #comparison }
+{ #category : 'comparison' }
 PP2ContextMemento >> hash [
 	^ self position hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ContextMemento >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ContextMemento >> position: anObject [
 	position := anObject
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 PP2ContextMemento >> postCopy [
 	properties := properties copy
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2ContextMemento >> properties [
 	^ properties
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2ContextMemento >> properties: newProperties [
 	^ properties := newProperties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ContextMemento >> stream [
 	^ stream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ContextMemento >> stream: anObject [
 	stream := anObject
 ]

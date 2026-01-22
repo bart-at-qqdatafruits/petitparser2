@@ -2,12 +2,14 @@
 Default strategy for PP2MappingNode.
 "
 Class {
-	#name : #PP2Mapping,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2Mapping',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Mapping >> parseOn: aPP2Context [
 	| retval |
 	^ (retval := node child parseOn: aPP2Context) isPetit2Success

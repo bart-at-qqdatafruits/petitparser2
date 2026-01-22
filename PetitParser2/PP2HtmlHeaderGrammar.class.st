@@ -6,18 +6,20 @@ PP2HtmlHeaderGrammar example
 The example starts a  ZincClient in streaming mode and utilizes PP2 capabilities to work on streams. It reads the stream up until the end of a header or until start of a body.
 "
 Class {
-	#name : #PP2HtmlHeaderGrammar,
-	#superclass : #PP2CompositeNode,
+	#name : 'PP2HtmlHeaderGrammar',
+	#superclass : 'PP2CompositeNode',
 	#instVars : [
 		'headerStart',
 		'bodyStart',
 		'header',
 		'htmlFragment'
 	],
-	#category : #'PetitParser2-Examples'
+	#category : 'PetitParser2-Examples',
+	#package : 'PetitParser2',
+	#tag : 'Examples'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 PP2HtmlHeaderGrammar class >> example [
 	| byteStream stream |
 	byteStream := ZnClient new
@@ -29,13 +31,13 @@ PP2HtmlHeaderGrammar class >> example [
 	^ PP2HtmlHeaderGrammar new optimize parse: stream
 ]
 
-{ #category : #rules }
+{ #category : 'rules' }
 PP2HtmlHeaderGrammar >> bodyStart [
 	^ '<body' asPParser
 
 ]
 
-{ #category : #rules }
+{ #category : 'rules' }
 PP2HtmlHeaderGrammar >> header [
 	^ '<head>' asPParser, #any asPParser starLazy, '</head>' asPParser
 	
@@ -45,17 +47,17 @@ PP2HtmlHeaderGrammar >> header [
 
 ]
 
-{ #category : #rules }
+{ #category : 'rules' }
 PP2HtmlHeaderGrammar >> headerStart [
 	^ '<head' asPParser
 ]
 
-{ #category : #rules }
+{ #category : 'rules' }
 PP2HtmlHeaderGrammar >> htmlFragment [
 	^ (#any asPParser starLazy: (headerStart / bodyStart)), header ==> #second
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2HtmlHeaderGrammar >> start [
 	^ htmlFragment
 ]

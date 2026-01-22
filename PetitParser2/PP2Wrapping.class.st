@@ -2,12 +2,14 @@
 Default strategy for PP2WrappingNode.
 "
 Class {
-	#name : #PP2Wrapping,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2Wrapping',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Wrapping >> parseOn: aPP2Context [
 	^ node block value: aPP2Context value: [ node child parseOn: aPP2Context ]
 ]

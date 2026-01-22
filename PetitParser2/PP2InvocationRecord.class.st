@@ -1,45 +1,47 @@
 Class {
-	#name : #PP2InvocationRecord,
-	#superclass : #PP2EventRecord,
+	#name : 'PP2InvocationRecord',
+	#superclass : 'PP2EventRecord',
 	#instVars : [
 		'start',
 		'stop',
 		'debugResult'
 	],
-	#category : 'PetitParser2-Recording'
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2InvocationRecord >> debugResult [
 	^ debugResult
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2InvocationRecord >> debugResult: anObject [
 	debugResult := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2InvocationRecord >> isInvocation [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2InvocationRecord >> start [
 	^ start
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2InvocationRecord >> start: anObject [
 	start := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2InvocationRecord >> stop [
 	^ stop
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2InvocationRecord >> stop: anObject [
 	stop := anObject
 ]

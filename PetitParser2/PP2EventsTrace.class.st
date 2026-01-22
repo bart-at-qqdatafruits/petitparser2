@@ -1,51 +1,53 @@
 Class {
-	#name : #PP2EventsTrace,
-	#superclass : #Object,
+	#name : 'PP2EventsTrace',
+	#superclass : 'Object',
 	#instVars : [
 		'entries',
 		'fEntries',
 		'colors',
 		'selection'
 	],
-	#category : 'PetitParser2-Recording'
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 PP2EventsTrace >> addLast: aPP2ProfilingEvent [
 	entries addLast: aPP2ProfilingEvent 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> entries [
 	^ entries
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> entries: aCollection [
 	entries := aCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 PP2EventsTrace >> entriesCollect: aBlock [
 	^ entries collect: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> entriesCount [
 	^ entries size
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 PP2EventsTrace >> entriesDo: aBlock [
 	^ entries do: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> entryAt: index [
 	^ entries at: index
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2EventsTrace >> filterEvents: eventsCollection [
 	fEntries := OrderedCollection new.
 	self halt: 'obsolete?'.	
@@ -59,14 +61,14 @@ PP2EventsTrace >> filterEvents: eventsCollection [
 	^ fEntries
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2EventsTrace >> initialize [
 	super initialize.
 	
 	entries := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> interval [
 "	
 	(start isNil not and: [stop isNil not]) ifTrue: [ 
@@ -76,12 +78,12 @@ PP2EventsTrace >> interval [
 	^ 1 to: entries size.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> last [
 	^ entries last
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> limit: eventsCollection [
 	| limit |
 	
@@ -98,37 +100,37 @@ PP2EventsTrace >> limit: eventsCollection [
 	^ limit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> selection [
 	^ selection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> selection: invocationEntry [
 	selection := invocationEntry
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> selectionNode [
 	^ selection isNil ifFalse: [ selection node ] ifTrue: [ nil  ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> selectionPosition [
 	^ selection isNil ifFalse: [ selection position ] ifTrue: [ SmallInteger maxVal  ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> selectionStart [
 	^ selection isNil ifFalse: [ selection start ] ifTrue: [ SmallInteger maxVal  ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> selectionStop [
 	^ selection isNil ifFalse: [ selection stop ] ifTrue: [ SmallInteger minVal  ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventsTrace >> strategies [
 	^ entries collect: #strategy
 ]

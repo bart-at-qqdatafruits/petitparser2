@@ -1,15 +1,17 @@
 Class {
-	#name : #PP2MatchNode,
-	#superclass : #PP2CsNode,
-	#category : 'PetitParser2-Context'
+	#name : 'PP2MatchNode',
+	#superclass : 'PP2CsNode',
+	#category : 'PetitParser2-Context',
+	#package : 'PetitParser2',
+	#tag : 'Context'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2MatchNode >> accept: visitor [
 	^ visitor visitMatch: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2MatchNode >> resetStrategy [
 	strategy := PP2Match on: self
 ]

@@ -1,10 +1,12 @@
 Class {
-	#name : #PP2RecordingStrategy,
-	#superclass : #PP2WrappingStrategy,
-	#category : 'PetitParser2-Recording'
+	#name : 'PP2RecordingStrategy',
+	#superclass : 'PP2WrappingStrategy',
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2RecordingStrategy >> parseOn: context [
 	| result entry lastDebugResult |
 	self node hasName ifTrue: [ context namedInvoked 	] ifFalse: [ context invoked ].

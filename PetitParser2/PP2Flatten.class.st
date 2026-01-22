@@ -2,12 +2,14 @@
 Default strategy for PP2FlattenNode.
 "
 Class {
-	#name : #PP2Flatten,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2Flatten',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Flatten >> parseOn: aPP2Context [
 	| retval start |
 	start := aPP2Context position.

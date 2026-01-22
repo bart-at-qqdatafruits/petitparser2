@@ -2,25 +2,27 @@
 Memoization cache for bounded seas.
 "
 Class {
-	#name : #PP2MemoizedSea,
-	#superclass : #PP2WrappingStrategy,
+	#name : 'PP2MemoizedSea',
+	#superclass : 'PP2WrappingStrategy',
 	#instVars : [
 		'buffer',
 		'memoizationStrategy'
 	],
-	#category : #'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2MemoizedSea >> cache [
 	^ self
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2MemoizedSea >> cacheHit: context [
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2MemoizedSea >> initialize [
 	super initialize.
 	"
@@ -31,26 +33,26 @@ PP2MemoizedSea >> initialize [
 	"
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2MemoizedSea >> invocation [
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2MemoizedSea >> isCache [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2MemoizedSea >> isMemoized [
 	^ true
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2MemoizedSea >> memoize [
 	^ self
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2MemoizedSea >> parseOn: context [
 	| contextMemento returnValue |
 	self invocation.
@@ -77,17 +79,17 @@ PP2MemoizedSea >> parseOn: context [
 
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2MemoizedSea >> recording [
 	^ PP2RecordingMemoizedSea on: strategy
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2MemoizedSea >> remember: context [
 	^ memoizationStrategy remember: context
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2MemoizedSea >> reset [
 	self node isContextSensitive ifTrue: [  
 		memoizationStrategy := PP2CSMemoization new.
@@ -98,7 +100,7 @@ PP2MemoizedSea >> reset [
 	]
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2MemoizedSea >> restore: context from: memento [
 	^ memoizationStrategy restore: context from: memento
 ]

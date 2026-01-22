@@ -1,14 +1,16 @@
 Class {
-	#name : #PP2PlusPredicateObject,
-	#superclass : #PP2PossesiveRepeating,
+	#name : 'PP2PlusPredicateObject',
+	#superclass : 'PP2PossesiveRepeating',
 	#instVars : [
 		'predicate',
 		'failure'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2PlusPredicateObject >> initializeFor: aPP2Node [
 	super initializeFor: aPP2Node.
 	
@@ -16,7 +18,7 @@ PP2PlusPredicateObject >> initializeFor: aPP2Node [
 	failure := PP2Failure message: 'predicate not found'
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2PlusPredicateObject >> parseOn: aPP2Context [
 	| elements |
 	

@@ -2,44 +2,46 @@
 Packrat cache. Remembers the result of parsing for every position (contrary to the PP2Cache, which remembers only one position). Can improve performance for heavily backtracking grammars, but lookup can be expensive.
 "
 Class {
-	#name : #PP2Packrat,
-	#superclass : #PP2WrappingStrategy,
+	#name : 'PP2Packrat',
+	#superclass : 'PP2WrappingStrategy',
 	#instVars : [
 		'buffer',
 		'memoizationStrategy'
 	],
-	#category : #'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Packrat >> buffer [
 	^ buffer
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2Packrat >> cacheHit: context [
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 PP2Packrat >> invocation [
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Packrat >> isCache [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Packrat >> isMemoized [
 	^ true
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2Packrat >> memoize [
 	^ self
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Packrat >> parseOn: context [
 	| contextMemento returnValue result |
 	self invocation.
@@ -63,17 +65,17 @@ PP2Packrat >> parseOn: context [
 
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2Packrat >> recording [
 	^ PP2RecordingPackrat on: strategy
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Packrat >> remember: context [
 	^ memoizationStrategy remember: context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Packrat >> reset [
 	self node isContextSensitive ifTrue: [  
 		memoizationStrategy := PP2CSMemoization new.
@@ -84,7 +86,7 @@ PP2Packrat >> reset [
 	]
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Packrat >> restore: context from: memento [
 	^ memoizationStrategy restore: context from: memento
 ]

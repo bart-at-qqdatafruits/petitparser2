@@ -8,17 +8,19 @@ Example:
 $a asPParser ==> [ :a | a uppercase ] parse: 'a'
 "
 Class {
-	#name : #PP2ActionNode,
-	#superclass : #PP2AbstractActionNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2ActionNode',
+	#superclass : 'PP2AbstractActionNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2ActionNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitAction: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2ActionNode >> resetStrategy [
 	strategy := PP2Action on: self
 ]

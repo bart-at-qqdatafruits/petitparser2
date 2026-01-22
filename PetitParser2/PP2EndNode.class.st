@@ -6,22 +6,24 @@ $a asPParser end parse: 'a'.
 $a asPParser end parse: 'ab'.
 "
 Class {
-	#name : #PP2EndNode,
-	#superclass : #PP2DelegateNode,
-	#category : 'PetitParser2-Nodes'
+	#name : 'PP2EndNode',
+	#superclass : 'PP2DelegateNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2EndNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitEnd: self
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2EndNode >> end [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2EndNode >> resetStrategy [
 	strategy := PP2End on: self
 ]

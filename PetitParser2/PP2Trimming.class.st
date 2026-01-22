@@ -2,12 +2,14 @@
 Default strategy for PP2TrimmingNode.
 "
 Class {
-	#name : #PP2Trimming,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2Trimming',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Trimming >> parseOn: aPP2Context [
 	| position retval |
 	position := aPP2Context position.

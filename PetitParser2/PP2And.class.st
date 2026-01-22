@@ -2,12 +2,14 @@
 Default strategy for PP2AndNode.
 "
 Class {
-	#name : #PP2And,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2And',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2And >> parseOn: context [
 	| memento retval |
 	memento := self remember: context.

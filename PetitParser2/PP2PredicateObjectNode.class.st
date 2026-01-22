@@ -5,12 +5,14 @@ Examples:
 #letter asPParser
 "
 Class {
-	#name : #PP2PredicateObjectNode,
-	#superclass : #PP2PredicateNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2PredicateObjectNode',
+	#superclass : 'PP2PredicateNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #'factory-objects' }
+{ #category : 'factory-objects' }
 PP2PredicateObjectNode class >> anyOf: aCollection [
 	^ self new
 		predicate: [ :each | aCollection includes: each ];
@@ -19,7 +21,7 @@ PP2PredicateObjectNode class >> anyOf: aCollection [
 		negatedMessage: 'none of ' , aCollection printString ,  'expected'
 ]
 
-{ #category : #'factory-objects' }
+{ #category : 'factory-objects' }
 PP2PredicateObjectNode class >> expect: anObject message: aString [
 	^ (self new)
 		predicate: [ :each | each = anObject ];
@@ -28,7 +30,7 @@ PP2PredicateObjectNode class >> expect: anObject message: aString [
 		negatedMessage: 'no ' , aString
 ]
 
-{ #category : #'factory-objects' }
+{ #category : 'factory-objects' }
 PP2PredicateObjectNode class >> noneOf: aCollection [
 	^ self new
 		predicate: [ :each | (aCollection includes: each) not ];
@@ -37,23 +39,23 @@ PP2PredicateObjectNode class >> noneOf: aCollection [
 		negatedMessage: 'any of ' , aCollection printString ,  'expected'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2PredicateObjectNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitPredicateObject: self
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2PredicateObjectNode >> firstCharSet [
 	^ predicate asCharSetPredicate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateObjectNode >> predicate: aPP2CharSetPredicateOrBlock [
 	"Using char set predicate is a performance optimization"
 	predicate := aPP2CharSetPredicateOrBlock asCharSetPredicate
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2PredicateObjectNode >> resetStrategy [
 	strategy := PP2PredicateObject on: self
 ]

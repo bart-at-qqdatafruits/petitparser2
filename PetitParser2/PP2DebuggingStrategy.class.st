@@ -1,23 +1,25 @@
 Class {
-	#name : #PP2DebuggingStrategy,
-	#superclass : #PP2WrappingStrategy,
+	#name : 'PP2DebuggingStrategy',
+	#superclass : 'PP2WrappingStrategy',
 	#instVars : [
 		'resultCache'
 	],
-	#category : 'PetitParser2-Debug'
+	#category : 'PetitParser2-Debug',
+	#package : 'PetitParser2',
+	#tag : 'Debug'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2DebuggingStrategy class >> on: aPP2Strategy [
 	^ self new initializeFor: aPP2Strategy
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2DebuggingStrategy >> cache [
 	strategy := strategy cache
 ]
 
-{ #category : #caching }
+{ #category : 'caching' }
 PP2DebuggingStrategy >> cacheIfNeeded: result debugResult: debugResult [
 	(strategy includesCache) ifFalse: [  
 		^ self
@@ -40,22 +42,22 @@ PP2DebuggingStrategy >> cacheIfNeeded: result debugResult: debugResult [
 	]
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2DebuggingStrategy >> debug [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2DebuggingStrategy >> initialize [
 	resultCache := IdentityDictionary new.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2DebuggingStrategy >> isDebugging [
 	^ true
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2DebuggingStrategy >> parseOn: context [
 	| parentDebugResult debugResult result |
 	parentDebugResult := context currentDebugResult.
@@ -80,22 +82,22 @@ PP2DebuggingStrategy >> parseOn: context [
 	^ result
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2DebuggingStrategy >> parsingGuard: classification [
 	strategy := strategy parsingGuard: classification
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2DebuggingStrategy >> recording [
 	^ PP2RecordingDebuggingStrategy on: strategy 
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2DebuggingStrategy >> reparsable [
 	strategy := strategy reparsable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebuggingStrategy >> withoutDebugStrategy [
 	^ strategy withoutDebugStrategy
 ]

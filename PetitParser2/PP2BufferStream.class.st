@@ -9,30 +9,32 @@ PP2BufferStream will provide extra functionality and buffering to ensure the min
 Note: Everyting in this stream is indexed from 0 and not from 1. Modulo arithmetics that works better when indexed from 0.
 "
 Class {
-	#name : #PP2BufferStream,
-	#superclass : #Object,
+	#name : 'PP2BufferStream',
+	#superclass : 'Object',
 	#instVars : [
 		'stream',
 		'buffer',
 		'bufferSize',
 		'position'
 	],
-	#category : #'PetitParser2-Streams'
+	#category : 'PetitParser2-Streams',
+	#package : 'PetitParser2',
+	#tag : 'Streams'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2BufferStream class >> new [
 	"for compatibility reasons"
 	^ self basicNew
 		initialize
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2BufferStream class >> on: stream [
 	^ self on: stream bufferSize: 1024
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2BufferStream class >> on: stream bufferSize: bufferSize [
 	^ (self basicNew)
 		initializeForSize: bufferSize;
@@ -40,29 +42,29 @@ PP2BufferStream class >> on: stream bufferSize: bufferSize [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2BufferStream >> asPetit2Context [
 	^ PP2Context on: self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2BufferStream >> asPetit2Stream [
 	^ self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2BufferStream >> asPetitStream [
 	^ stream asPetitStream
 ]
 
-{ #category : #'context interface' }
+{ #category : 'context interface' }
 PP2BufferStream >> atEnd: readPosition [
 	self upToPosition: readPosition.
 	
 	^ (readPosition >= position) and: [ stream atEnd ]
 ]
 
-{ #category : #'context interface' }
+{ #category : 'context interface' }
 PP2BufferStream >> atPosition: readPosition [
 	(readPosition == position) ifTrue: [ 
 		^ self last.
@@ -83,23 +85,23 @@ PP2BufferStream >> atPosition: readPosition [
 
 ]
 
-{ #category : #'accessing - private' }
+{ #category : 'accessing - private' }
 PP2BufferStream >> buffer [
 	^ buffer 
 ]
 
-{ #category : #'accessing - private' }
+{ #category : 'accessing - private' }
 PP2BufferStream >> bufferSize [
 	^ bufferSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2BufferStream >> contents [
 	"Not sure, what is the best think to return..."
 	^ buffer contents copyFrom: 1 to: position
 ]
 
-{ #category : #'context interface' }
+{ #category : 'context interface' }
 PP2BufferStream >> copyFrom: start to: stop [
 	"start - end should be in range <0, size)"
 	| bufferStart bufferStop |	
@@ -135,12 +137,12 @@ PP2BufferStream >> copyFrom: start to: stop [
 	]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2BufferStream >> initialize [
 	self initializeForSize: 1024
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2BufferStream >> initializeForSize: size [
 	"nothing to do"
 	bufferSize := size.
@@ -148,17 +150,17 @@ PP2BufferStream >> initializeForSize: size [
 	position := 0.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2BufferStream >> isBuffered [
 	^ true
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2BufferStream >> last [
 	^ buffer at: ((position - 1) \\ bufferSize) + 1
 ]
 
-{ #category : #'context interface' }
+{ #category : 'context interface' }
 PP2BufferStream >> newToken: tokenClass from: start to: stop [
 	| collection |
 	collection := self copyFrom: start to: stop.
@@ -169,23 +171,23 @@ PP2BufferStream >> newToken: tokenClass from: start to: stop [
 		stop: 	(stop - start + 1)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2BufferStream >> printOn: writeStream position: currentPosition [
 	"TODO: show the position as well"
 	stream contents printOn: writeStream
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2BufferStream >> reset [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2BufferStream >> stream: aStream [
 	stream := aStream
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2BufferStream >> uncheckedNext [
 	| bufferIndex |
 	bufferIndex := (position \\ bufferSize) + 1.
@@ -195,7 +197,7 @@ PP2BufferStream >> uncheckedNext [
 	^ buffer at: bufferIndex
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2BufferStream >> upToPosition: readPosition [
 	[position < (readPosition) and: [ stream atEnd not ]] whileTrue: [  
 		self uncheckedNext

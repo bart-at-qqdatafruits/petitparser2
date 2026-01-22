@@ -1,15 +1,17 @@
 Class {
-	#name : #PP2RecordingContext,
-	#superclass : #PP2InMemoryContext,
+	#name : 'PP2RecordingContext',
+	#superclass : 'PP2InMemoryContext',
 	#instVars : [
 		'totalSize',
 		'eventsTrace',
 		'furthestPosition'
 	],
-	#category : 'PetitParser2-Recording'
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2RecordingContext >> asCacheReport [
 	| table |
 	table := OrderedCollection new. 
@@ -20,7 +22,7 @@ PP2RecordingContext >> asCacheReport [
 	^ table
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2RecordingContext >> asFrequencyTable [
 	| bag total result |
 	bag := (eventsTrace entriesCollect: #strategy) asBag.
@@ -32,7 +34,7 @@ PP2RecordingContext >> asFrequencyTable [
 	^ result
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2RecordingContext >> asFrequencyTableForEvent: event [
 	| bag total result filtered |
 	
@@ -50,7 +52,7 @@ PP2RecordingContext >> asFrequencyTableForEvent: event [
 	^ result
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2RecordingContext >> asReportTable [
 	| backtrackPerCharacter restoreCount rememberCount table lwRememberCount lwRestoreCount lwBacktrackPerCharacter |
 	rememberCount := (self countFor: #remember).
@@ -75,12 +77,12 @@ PP2RecordingContext >> asReportTable [
 	^ table
 ]
 
-{ #category : #recording }
+{ #category : 'recording' }
 PP2RecordingContext >> cacheHit [
 	self event: #cacheHit
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 PP2RecordingContext >> countFor: event [
 	| count |
 	count := 0.
@@ -90,7 +92,7 @@ PP2RecordingContext >> countFor: event [
 	^ count
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> event: value [
 	| entry |
 
@@ -103,7 +105,7 @@ PP2RecordingContext >> event: value [
 	eventsTrace addLast: entry
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2RecordingContext >> eventsTable [
 	| trace |
 	trace := OrderedCollection new.
@@ -119,38 +121,38 @@ PP2RecordingContext >> eventsTable [
 	^ trace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> eventsTrace [
 	^ eventsTrace 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2RecordingContext >> findContextSuchThat: aBlock [
 	^ thisContext findContextSuchThat: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> furthestPosition [
 	^ furthestPosition max: position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> furthestPosition: anObject [
 	furthestPosition := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2RecordingContext >> initialize [
 	super initialize.
 	self reset.
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 PP2RecordingContext >> invocationCount [
 	^  self countFor: #methodInvoked
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 PP2RecordingContext >> invoked [
 	| entry |
 
@@ -163,12 +165,12 @@ PP2RecordingContext >> invoked [
 	eventsTrace addLast: entry
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2RecordingContext >> isRecording [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> lastDebugResult [
 	^ (self currentDebugResult children) isEmpty ifTrue: [ 
 		nil
@@ -177,7 +179,7 @@ PP2RecordingContext >> lastDebugResult [
 	]
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 PP2RecordingContext >> namedInvoked [
 	| entry |
 
@@ -190,7 +192,7 @@ PP2RecordingContext >> namedInvoked [
 	eventsTrace addLast: entry
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> next [
 	self event: #next.
 	furthestPosition := (furthestPosition max: position + 1).
@@ -198,7 +200,7 @@ PP2RecordingContext >> next [
 	^ super next
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> next: number [
 	self event: #next.
 	furthestPosition := (furthestPosition max: position + number).
@@ -206,7 +208,7 @@ PP2RecordingContext >> next: number [
 	^ super next: number
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2RecordingContext >> node [
 	^ (self findContextSuchThat: [ :ctxt | (ctxt receiver isKindOf: PP2AbstractStrategy)])
 		ifNil: [ nil ]
@@ -216,7 +218,7 @@ PP2RecordingContext >> node [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> parser: aPP2Node [
 	super parser: aPP2Node.
 	
@@ -224,25 +226,25 @@ PP2RecordingContext >> parser: aPP2Node [
 	aPP2Node enableRecording.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> position: value [
 	self assert: value isInteger.
 	super position: value
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 PP2RecordingContext >> remember [
 	self event: #remember.
 	^ super remember
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2RecordingContext >> rememberPosition [
 	self event: #rememberPosition.
 	^ super rememberPosition
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2RecordingContext >> reset [
 	super reset.
 	
@@ -251,14 +253,14 @@ PP2RecordingContext >> reset [
 	totalSize := 0.
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2RecordingContext >> restore: whatever [
 	self event: #restore.
 	furthestPosition := (furthestPosition max: position).
 	^ super restore: whatever
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2RecordingContext >> restorePosition: newPosition [
 	self event: #restorePosition.
 	furthestPosition := (furthestPosition max: position).
@@ -266,12 +268,12 @@ PP2RecordingContext >> restorePosition: newPosition [
 	^ super restorePosition: newPosition
 ]
 
-{ #category : #requirements }
+{ #category : 'requirements' }
 PP2RecordingContext >> setAsStartState [
 	^ self startMemento: super remember
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2RecordingContext >> strategy [
 	^ (self findContextSuchThat: [ :ctxt | (ctxt receiver isKindOf: PP2AbstractStrategy)])
 		ifNil: [ PP2NilStrategy new ]
@@ -279,7 +281,7 @@ PP2RecordingContext >> strategy [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> stream: aStream [
 	super stream: aStream.
 
@@ -287,18 +289,18 @@ PP2RecordingContext >> stream: aStream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingContext >> totalSize [
 	^ totalSize
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 PP2RecordingContext >> uncheckedNext [
 	self event: #uncheckedNext.
 	^ super uncheckedNext
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 PP2RecordingContext >> uncheckedPeek [
 	self event: #uncheckedPeek.
 	^ super uncheckedPeek

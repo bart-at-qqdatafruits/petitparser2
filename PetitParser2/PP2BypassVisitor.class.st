@@ -1,20 +1,22 @@
 Class {
-	#name : #PP2BypassVisitor,
-	#superclass : #PP2NoopVisitor,
-	#category : 'PetitParser2-Optimizations'
+	#name : 'PP2BypassVisitor',
+	#superclass : 'PP2NoopVisitor',
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2BypassVisitor >> doPass: node [
 	^ self visit: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2BypassVisitor >> visitComposite: node [
 	self visit: node child.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2BypassVisitor >> visitPP2Node: node [
 	| target |
 	node children do: [ :child | 

@@ -1,6 +1,6 @@
-Extension { #name : #Text }
+Extension { #name : 'Text' }
 
-{ #category : #'*PetitParser2' }
+{ #category : '*PetitParser2' }
 Text >> asPetit2Stream [
 	^ string asPetit2Stream
 ]

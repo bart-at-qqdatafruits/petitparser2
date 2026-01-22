@@ -1,30 +1,32 @@
 Class {
-	#name : #PP2SeaOptimizationVisitor,
-	#superclass : #PP2NoopVisitor,
+	#name : 'PP2SeaOptimizationVisitor',
+	#superclass : 'PP2NoopVisitor',
 	#instVars : [
 		'rootNode'
 	],
-	#category : 'PetitParser2-Optimizations'
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SeaOptimizationVisitor >> beforeAccept: context [
 	self isRoot ifTrue: [ rootNode := context node ].
 
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2SeaOptimizationVisitor >> doPass: node [
 	^ self visit: node
 	
 ]
 
-{ #category : #'seas optimizations' }
+{ #category : 'seas optimizations' }
 PP2SeaOptimizationVisitor >> nextSet: node [
 	^ rootNode nextSets at: node
 ]
 
-{ #category : #'seas optimizations' }
+{ #category : 'seas optimizations' }
 PP2SeaOptimizationVisitor >> optimizedNextSet: node [
 	| nextSet |
 	nextSet := self nextSet: node.
@@ -35,7 +37,7 @@ PP2SeaOptimizationVisitor >> optimizedNextSet: node [
 	^ nextSet
 ]
 
-{ #category : #'seas optimizations' }
+{ #category : 'seas optimizations' }
 PP2SeaOptimizationVisitor >> removeRepetitions: nextSet [
 	"
 		finds standalne seas and replaces them with islands.
@@ -55,7 +57,7 @@ PP2SeaOptimizationVisitor >> removeRepetitions: nextSet [
 	^ newNextSet
 ]
 
-{ #category : #'seas optimizations' }
+{ #category : 'seas optimizations' }
 PP2SeaOptimizationVisitor >> removeSeas: nextSet [
 	"
 		finds standalne seas and replaces them with islands.
@@ -77,7 +79,7 @@ PP2SeaOptimizationVisitor >> removeSeas: nextSet [
 	^ newNextSet
 ]
 
-{ #category : #'seas optimizations' }
+{ #category : 'seas optimizations' }
 PP2SeaOptimizationVisitor >> seaCanBeRemoved: firstSet ifTrue: oneArgBlock ifFalse: aBlock [
 	"Single sea"
 	(( firstSet size = 1) and: [ 
@@ -102,7 +104,7 @@ PP2SeaOptimizationVisitor >> seaCanBeRemoved: firstSet ifTrue: oneArgBlock ifFal
 
 ]
 
-{ #category : #'seas optimizations' }
+{ #category : 'seas optimizations' }
 PP2SeaOptimizationVisitor >> updateNode: node [
 	| nextSet |
 	nextSet := self optimizedNextSet: node.
@@ -112,7 +114,7 @@ PP2SeaOptimizationVisitor >> updateNode: node [
 	node root: rootNode.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SeaOptimizationVisitor >> visitSea: node [
 
 	super visitSea: node.

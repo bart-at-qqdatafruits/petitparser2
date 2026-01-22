@@ -1,10 +1,12 @@
 Class {
-	#name : #PP2MappingOfTwo,
-	#superclass : #PP2Mapping,
-	#category : 'PetitParser2-Strategies'
+	#name : 'PP2MappingOfTwo',
+	#superclass : 'PP2Mapping',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2MappingOfTwo >> parseOn: context [
 	| retval |
 	^ (retval := node child parseOn: context) isPetit2Success

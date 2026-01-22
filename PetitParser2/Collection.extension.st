@@ -1,6 +1,6 @@
-Extension { #name : #Collection }
+Extension { #name : 'Collection' }
 
-{ #category : #'*PetitParser2' }
+{ #category : '*PetitParser2' }
 Collection >> nodesDo: aBlock [
 	self do: aBlock
 ]

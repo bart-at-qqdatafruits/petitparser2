@@ -2,19 +2,21 @@
 Default strategy for PP2PredicateObjectNode.
 "
 Class {
-	#name : #PP2PredicateObject,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2PredicateObject',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2PredicateObject >> parseOn: aPP2Context [
 	^ (aPP2Context atEnd not and: [ node predicate value: aPP2Context uncheckedPeek ])
 		ifFalse: [ PP2Failure message: node predicateMessage context: aPP2Context  ]
 		ifTrue: [ aPP2Context uncheckedNext ]
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2PredicateObject >> recognizer [
 	^ PP2PredicateObjectRecognizer on: self node
 ]

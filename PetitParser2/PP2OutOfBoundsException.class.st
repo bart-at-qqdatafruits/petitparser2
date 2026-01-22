@@ -1,13 +1,15 @@
 Class {
-	#name : #PP2OutOfBoundsException,
-	#superclass : #Error,
+	#name : 'PP2OutOfBoundsException',
+	#superclass : 'Error',
 	#instVars : [
 		'subscript'
 	],
-	#category : #'PetitParser2-Core'
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #signalling }
+{ #category : 'signalling' }
 PP2OutOfBoundsException class >> signalFor: subscript [
 	^ (self new)
 		signalFor: subscript;
@@ -15,7 +17,7 @@ PP2OutOfBoundsException class >> signalFor: subscript [
 
 ]
 
-{ #category : #signalling }
+{ #category : 'signalling' }
 PP2OutOfBoundsException >> signalFor: anInteger [
 	subscript := anInteger
 ]

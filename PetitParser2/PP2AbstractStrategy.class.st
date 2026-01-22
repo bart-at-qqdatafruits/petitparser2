@@ -2,58 +2,60 @@
 Base class for all PP2 strategies. See PP2Strategy for more details.
 "
 Class {
-	#name : #PP2AbstractStrategy,
-	#superclass : #Object,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2AbstractStrategy',
+	#superclass : 'Object',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2AbstractStrategy >> allChildren [
 	self shouldBeImplemented 
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2AbstractStrategy >> cache [
 
 	^ PP2Cache on: self
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2AbstractStrategy >> debug [
 	^ PP2DebuggingStrategy on: self
 ]
 
-{ #category : #analysis }
+{ #category : 'analysis' }
 PP2AbstractStrategy >> includesCache [
 	^ self allChildren anySatisfy: [ :s | s isCache ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2AbstractStrategy >> isCache [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2AbstractStrategy >> isDebugging [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2AbstractStrategy >> isMemoized [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2AbstractStrategy >> isRecording [
 	^ false
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2AbstractStrategy >> memoize [
 	^ PP2Packrat on: self
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2AbstractStrategy >> parsingGuard: classification [
 	^ (PP2ParsingGuard on: self)
 		classification: classification;
@@ -61,22 +63,22 @@ PP2AbstractStrategy >> parsingGuard: classification [
 		yourself
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2AbstractStrategy >> recognizer [
 	^ self
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2AbstractStrategy >> recording [
 	^ self
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2AbstractStrategy >> trimmingCache [
 	^ PP2TrimmingCache on: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2AbstractStrategy >> withoutDebugStrategy [
 	^ self
 ]

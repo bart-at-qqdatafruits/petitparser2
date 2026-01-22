@@ -1,31 +1,33 @@
 Class {
-	#name : #PP2RecordingTrimmingCache,
-	#superclass : #PP2TrimmingCache,
+	#name : 'PP2RecordingTrimmingCache',
+	#superclass : 'PP2TrimmingCache',
 	#traits : 'TPP2RecordingCache',
 	#classTraits : 'TPP2RecordingCache classTrait',
 	#instVars : [
 		'invocations',
 		'hits'
 	],
-	#category : 'PetitParser2-Recording'
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingTrimmingCache >> hits [
 	^ hits 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingTrimmingCache >> hits: anInteger [
 	hits := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingTrimmingCache >> invocations [
 	^ invocations 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingTrimmingCache >> invocations: anInteger [
 	invocations := anInteger
 ]

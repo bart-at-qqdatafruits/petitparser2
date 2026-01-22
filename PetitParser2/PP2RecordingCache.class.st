@@ -1,37 +1,39 @@
 Class {
-	#name : #PP2RecordingCache,
-	#superclass : #PP2Cache,
+	#name : 'PP2RecordingCache',
+	#superclass : 'PP2Cache',
 	#traits : 'TPP2RecordingCache',
 	#classTraits : 'TPP2RecordingCache classTrait',
 	#instVars : [
 		'invocations',
 		'hits'
 	],
-	#category : 'PetitParser2-Recording'
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingCache >> hits [
 	^ hits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingCache >> hits: anInteger [
 	hits := anInteger
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2RecordingCache >> initialize [
 	super initialize.
 	self resetCounters.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingCache >> invocations [
 	^ invocations 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingCache >> invocations: anInteger [
 	invocations := anInteger
 ]

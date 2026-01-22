@@ -1,19 +1,21 @@
 Class {
-	#name : #PP2OptionalLiteralObject,
-	#superclass : #PP2Optional,
+	#name : 'PP2OptionalLiteralObject',
+	#superclass : 'PP2Optional',
 	#instVars : [
 		'character'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2OptionalLiteralObject >> initializeFor: aPP2Node [
 	super initializeFor: aPP2Node.
 	character := node child literal
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2OptionalLiteralObject >> parseOn: aPP2Context [
 	^ (aPP2Context peek == character) ifTrue: [ 
 		aPP2Context uncheckedNext 

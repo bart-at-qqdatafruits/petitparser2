@@ -1,28 +1,30 @@
 Class {
-	#name : #PP2SpecializingVisitor,
-	#superclass : #PP2NoopVisitor,
-	#category : 'PetitParser2-Optimizations'
+	#name : 'PP2SpecializingVisitor',
+	#superclass : 'PP2NoopVisitor',
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2SpecializingVisitor >> doPass: node [
 	^ self visit: node
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isAndLiteralObject: node [ 
 	self assert: (node isKindOf: PP2AndNode).
 	^ (node child isKindOf: PP2LiteralObjectNode) 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isAndPredicateObject: node [ 
 	self assert: (node isKindOf: PP2AndNode).
 	^ (node child isKindOf: PP2PredicateObjectNode) 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isAny: node [
 	(node isKindOf: PP2PredicateNode) ifFalse: [ ^ false ].
 	
@@ -32,7 +34,7 @@ PP2SpecializingVisitor >> isAny: node [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isAnyStarLazyLiteralObject: node [ 
 	(self isAnyStarLazyObject: node) ifFalse: [ ^ false ].
 		
@@ -40,7 +42,7 @@ PP2SpecializingVisitor >> isAnyStarLazyLiteralObject: node [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isAnyStarLazyObject: node [ 
 	| sea |
 	node class = PP2MappingNode ifFalse: [ ^ false ].
@@ -56,7 +58,7 @@ PP2SpecializingVisitor >> isAnyStarLazyObject: node [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isAnyStarLazyPredicateObject: node [ 
 	(self isAnyStarLazyObject: node) ifFalse: [ ^ false ].
 	
@@ -64,41 +66,41 @@ PP2SpecializingVisitor >> isAnyStarLazyPredicateObject: node [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isMappingOfThree: node [ 
 	self assert: (node isKindOf: PP2MappingNode).
 	^ (node child children size = 3) 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isMappingOfTwo: node [ 
 	self assert: (node isKindOf: PP2MappingNode).
 	^ (node child children size = 2) 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isNotLiteralObject: node [ 
 	self assert: (node isKindOf: PP2NotNode).
 	^ (node child isKindOf: PP2LiteralObjectNode) 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isNotPredicateObject: node [ 
 	self assert: (node isKindOf: PP2NotNode).
 	^ (node child isKindOf: PP2PredicateObjectNode) 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isOptionalCharacter: node [ 
 	^ (node child isKindOf: PP2LiteralObjectNode) 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isPlus: node [ 
 	^ node min = 1 and: [ node max = Float infinity ] 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isPlusPredicateObject: node [ 
 	^ (node min = 1) and: [ 
 	  (node max = Float infinity) and: [ 
@@ -106,12 +108,12 @@ PP2SpecializingVisitor >> isPlusPredicateObject: node [
 	]]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isStar: node [ 
 	^ node min = 0 and: [ node max = Float infinity ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isStarPredicateObject: node [ 
 	^ (node min = 0) and: [ 
 	  (node max = Float infinity) and: [ 
@@ -119,7 +121,7 @@ PP2SpecializingVisitor >> isStarPredicateObject: node [
 	]]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isTrimmingLiteralObjectToken: node [ 
 	self assert: (node isKindOf: PP2TrimmingNode).
 	
@@ -131,7 +133,7 @@ PP2SpecializingVisitor >> isTrimmingLiteralObjectToken: node [
 	"
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2SpecializingVisitor >> isTrimmingToken: node [ 
 	self assert: (node isKindOf: PP2TrimmingNode).
 
@@ -142,12 +144,12 @@ PP2SpecializingVisitor >> isTrimmingToken: node [
 	"
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SpecializingVisitor >> visitAdaptable: node [
 	"do not visit beyond this point"
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SpecializingVisitor >> visitAnd: node [
 	(self isAndLiteralObject: node) ifTrue: [  
 		node strategy: (PP2AndLiteralObject on: node)
@@ -161,7 +163,7 @@ PP2SpecializingVisitor >> visitAnd: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SpecializingVisitor >> visitMapping: node [
 	super visitMapping: node.
 	
@@ -193,7 +195,7 @@ PP2SpecializingVisitor >> visitMapping: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SpecializingVisitor >> visitNot: node [
 	(self isNotLiteralObject: node) ifTrue: [  
 		node strategy: (PP2NotLiteralObject on: node)
@@ -207,7 +209,7 @@ PP2SpecializingVisitor >> visitNot: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SpecializingVisitor >> visitOptional: node [
 	(self isOptionalCharacter: node) ifTrue: [  
 		node strategy: (PP2OptionalLiteralObject on: node)
@@ -217,7 +219,7 @@ PP2SpecializingVisitor >> visitOptional: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SpecializingVisitor >> visitPossesiveRepeating: node [
 	(self isStar: node) ifTrue: [  
 		node strategy: (PP2Star on: node)
@@ -241,7 +243,7 @@ PP2SpecializingVisitor >> visitPossesiveRepeating: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SpecializingVisitor >> visitSequence: node [
 	(node children size = 2) ifTrue: [  
 		node strategy: (PP2SequenceOfTwo on: node)
@@ -255,7 +257,7 @@ PP2SpecializingVisitor >> visitSequence: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2SpecializingVisitor >> visitTrimming: node [
 	(self isTrimmingToken: node) ifTrue: [  
 		node strategy: (PP2TrimmingToken on: node)

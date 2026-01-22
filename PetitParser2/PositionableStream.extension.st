@@ -1,6 +1,6 @@
-Extension { #name : #PositionableStream }
+Extension { #name : 'PositionableStream' }
 
-{ #category : #'*petitparser2' }
+{ #category : '*petitparser2' }
 PositionableStream >> asPetit2Stream [
 	^ PP2Stream on: self contents
 ]

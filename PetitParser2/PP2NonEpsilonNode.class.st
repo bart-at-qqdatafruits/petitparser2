@@ -6,17 +6,19 @@ $a asPParser optional nonEpsilon parse: 'a'
 $a asPParser optional nonEpsilon parse: 'b'
 "
 Class {
-	#name : #PP2NonEpsilonNode,
-	#superclass : #PP2DelegateNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2NonEpsilonNode',
+	#superclass : 'PP2DelegateNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2NonEpsilonNode >> accept: visitor [
 	^ visitor visitNonEpsilon: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2NonEpsilonNode >> resetStrategy [
 	strategy := PP2NonEpsilon on: self
 ]

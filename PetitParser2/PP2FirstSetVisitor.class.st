@@ -1,25 +1,27 @@
 Class {
-	#name : #PP2FirstSetVisitor,
-	#superclass : #PP2NoopVisitor,
+	#name : 'PP2FirstSetVisitor',
+	#superclass : 'PP2NoopVisitor',
 	#instVars : [
 		'terminalBlock',
 		'predicateBlock',
 		'leftRecursionAllowed'
 	],
-	#category : 'PetitParser2-Analysis'
+	#category : 'PetitParser2-Analysis',
+	#package : 'PetitParser2',
+	#tag : 'Analysis'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2FirstSetVisitor class >> firstSet [
 	^ self on: [ :e | e isFirstSetTerminal ] on: [ :e | e isFirstSetTerminal ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2FirstSetVisitor class >> new [
 	^ self firstSet
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2FirstSetVisitor class >> on: aBlock [
 	^ self basicNew initialize 
 		terminalBlock: aBlock;
@@ -27,7 +29,7 @@ PP2FirstSetVisitor class >> on: aBlock [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2FirstSetVisitor class >> on: terminalBlock on: predicateBlock [
 	^ self basicNew 
 		terminalBlock: terminalBlock;
@@ -36,41 +38,41 @@ PP2FirstSetVisitor class >> on: terminalBlock on: predicateBlock [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2FirstSetVisitor class >> productionSet [
 	^ self on: [ :e | e isFirstSetTerminal ] on: [ :e | e isProduction ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2FirstSetVisitor class >> seasOrTerminalsSet [
 	^ self 
 		on: [ :e | e isSea or: [ e isFirstSetTerminal ] ] 
 		on: [ :e | e isSea or: [ e isFirstSetTerminal ] ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2FirstSetVisitor class >> tokenSet [
 	^ self on: [ :e | e isToken or: [ e isFirstSetTerminal  ] ]
 ]
 
-{ #category : #support }
+{ #category : 'support' }
 PP2FirstSetVisitor >> addIfPossible: node to: collection [
 	(predicateBlock value: node) ifTrue: [ collection add: node ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2FirstSetVisitor >> initialize [
 	super initialize.
 	
 	leftRecursionAllowed := false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2FirstSetVisitor >> isTerminal: node [
 	^ terminalBlock value: node
 ]
 
-{ #category : #'loop control' }
+{ #category : 'loop control' }
 PP2FirstSetVisitor >> openedResultFor: context [
 	leftRecursionAllowed ifTrue: [ 
 		^ super openedResultFor: context
@@ -84,22 +86,22 @@ PP2FirstSetVisitor >> openedResultFor: context [
 	self error: 'There seems to be a left recursive loop in your grammar!'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2FirstSetVisitor >> predicateBlock [
 	^ predicateBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2FirstSetVisitor >> predicateBlock: anObject [
 	predicateBlock := anObject
 ]
 
-{ #category : #support }
+{ #category : 'support' }
 PP2FirstSetVisitor >> setWithPossible: node [ 
 	^ self setWithPossible: node withAll: #()
 ]
 
-{ #category : #support }
+{ #category : 'support' }
 PP2FirstSetVisitor >> setWithPossible: node withAll: aCollection [
 	| set |
 	set := IdentitySet withAll: aCollection.
@@ -111,22 +113,22 @@ PP2FirstSetVisitor >> setWithPossible: node withAll: aCollection [
 	^ set
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2FirstSetVisitor >> terminalBlock [
 	^ terminalBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2FirstSetVisitor >> terminalBlock: aBlock [
 	terminalBlock := aBlock
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitAction: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitAdaptable: node [
 	| set |
 	set := (self setWithPossible: node).
@@ -139,12 +141,12 @@ PP2FirstSetVisitor >> visitAdaptable: node [
 	^ set
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitAnd: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitChoice: node [
 	| returnSet |
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
@@ -157,13 +159,13 @@ PP2FirstSetVisitor >> visitChoice: node [
 	^ returnSet
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitComposite: node [
 	^ self visitDelegate: node
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitDelegate: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
@@ -171,27 +173,27 @@ PP2FirstSetVisitor >> visitDelegate: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitEnd: node [
 	^ self visitDelegate: node
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitEndOfInput: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
 	self warn: 'I guess you have some issues with your terminal block.'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitEndOfLine: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
 	self warn: 'I guess you have some issues with your terminal block.'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitEpsilon: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
@@ -199,7 +201,7 @@ PP2FirstSetVisitor >> visitEpsilon: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitFailing: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
@@ -207,7 +209,7 @@ PP2FirstSetVisitor >> visitFailing: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitFlatten: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
@@ -215,21 +217,21 @@ PP2FirstSetVisitor >> visitFlatten: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitLiteralObject: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
 	self warn: 'guess you have some issues with your terminal block'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitLiteralSequence: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
 	self warn: 'guess you have some issues with your terminal block'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitMapping: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
@@ -237,19 +239,19 @@ PP2FirstSetVisitor >> visitMapping: node [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitMatch: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitNewLine: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
 	self warn: 'I guess you have some issues with your terminal block.'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitNonEpsilon: node [
 	| set |
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
@@ -261,13 +263,13 @@ PP2FirstSetVisitor >> visitNonEpsilon: node [
 	^ set
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitNot: node [
 	^ self visitDelegate: node
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitOptional: node [
 	| set |
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
@@ -279,23 +281,23 @@ PP2FirstSetVisitor >> visitOptional: node [
 	^ set
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitPP2Node: node [
 	self error: 'should provide specific implementation'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitPluggable: node [
 	^ self visitDelegate: node
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitPop: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitPossesiveRepeating: node [
 	| set |
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
@@ -309,26 +311,26 @@ PP2FirstSetVisitor >> visitPossesiveRepeating: node [
 	^ set
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitPredicateObject: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
 	self warn: 'guess you have some issues with your terminal block'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitPredicateSequence: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
 	self warn: 'guess you have some issues with your terminal block'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitPush: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitSea: node [
 	| returnSet |
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
@@ -344,7 +346,7 @@ PP2FirstSetVisitor >> visitSea: node [
 	^ returnSet reject: [ :e | e isEpsilon ] 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitSequence: node [
 	| returnSet |
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
@@ -359,20 +361,20 @@ PP2FirstSetVisitor >> visitSequence: node [
 	^ returnSet
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitStartOfLine: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
 	self warn: 'I guess you have some issues with your terminal block.'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitToken: node [
 	^ self visitDelegate: node
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitTrimming: node [
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
 
@@ -382,7 +384,7 @@ PP2FirstSetVisitor >> visitTrimming: node [
 		yourself
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitWater: node [
 	| retval lrStatus |
 	(self isTerminal: node) ifTrue: [ ^ self setWithPossible: node ].
@@ -400,12 +402,12 @@ PP2FirstSetVisitor >> visitWater: node [
 	^ retval
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2FirstSetVisitor >> visitWrapping: node [
 	^ self visitDelegate: node
 ]
 
-{ #category : #warnings }
+{ #category : 'warnings' }
 PP2FirstSetVisitor >> warn: aMessage [
 	Transcript crShow: aMessage.
 	self error: 'this should not really happen.'.

@@ -2,60 +2,62 @@
 Base class for all PP2 strategies. All PP2Strategy is 'strategy' design pattern. Each PP2Node has default parsing strategy, which specifies how the given node parses an input. During optimization, default strategies can be replaced with more specific (and hopefully faster) parsing strategies.
 "
 Class {
-	#name : #PP2Strategy,
-	#superclass : #PP2AbstractStrategy,
+	#name : 'PP2Strategy',
+	#superclass : 'PP2AbstractStrategy',
 	#instVars : [
 		'node'
 	],
-	#category : #'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2Strategy class >> new [
 	^ self error: 'Use "#on: aPP2Node" instead'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2Strategy class >> on: aPP2Node [
 	^ self basicNew initializeFor:	aPP2Node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Strategy >> allChildren [
 	^ OrderedCollection with: self
 ]
 
-{ #category : #transformation }
+{ #category : 'transformation' }
 PP2Strategy >> bypass: aPP2Node to: target [
 	"nothing to do really"
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Strategy >> initializeFor: aPP2Node [
 	node := aPP2Node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Strategy >> node [
 	^ node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Strategy >> node: anObject [
 	node := anObject
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Strategy >> parseOn: aPP2Context [
 	self subclassResponsibility 
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Strategy >> remember: context [
 	^ node memoizationStrategy remember: context
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Strategy >> restore: context from: memento [
 	node memoizationStrategy restore: context from: memento
 ]

@@ -1,16 +1,18 @@
 Class {
-	#name : #PP2PackratVisitor,
-	#superclass : #PP2NoopVisitor,
-	#category : 'PetitParser2-Optimizations'
+	#name : 'PP2PackratVisitor',
+	#superclass : 'PP2NoopVisitor',
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2PackratVisitor >> doPass: node [
 	^ self visit: node
 	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2PackratVisitor >> visitPP2Node: node [
 	(node shouldMemoize) ifTrue: [  
 		(node contextChanges isContextChange) ifTrue: [  

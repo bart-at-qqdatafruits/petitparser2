@@ -1,10 +1,12 @@
 Class {
-	#name : #PP2Match,
-	#superclass : #PP2Strategy,
-	#category : 'PetitParser2-Context'
+	#name : 'PP2Match',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Context',
+	#package : 'PetitParser2',
+	#tag : 'Context'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Match >> parseOn: context [
 	| retval stackTop memento stack |
 	memento := self remember: context.

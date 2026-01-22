@@ -4,8 +4,8 @@ Represents a language token. Can be created by using #token message:
 #letter asPParser plus token parse: 'hi there'
 "
 Class {
-	#name : #PP2Token,
-	#superclass : #Object,
+	#name : 'PP2Token',
+	#superclass : 'Object',
 	#traits : 'TPP2Properties',
 	#classTraits : 'TPP2Properties classTrait',
 	#instVars : [
@@ -14,10 +14,12 @@ Class {
 		'stop',
 		'properties'
 	],
-	#category : #'PetitParser2-Core'
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2Token class >> on: collection start: start stop: stop [
 	^ self new
 		collection: collection;
@@ -26,22 +28,22 @@ PP2Token class >> on: collection start: start stop: stop [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Token >> collection [
 	^ collection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Token >> collection: anObject [
 	collection := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Token >> isToken [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2Token >> printOn: aStream [
 	self value printOn: aStream.
 	aStream nextPut: $[.
@@ -51,49 +53,49 @@ PP2Token >> printOn: aStream [
 	aStream nextPut: $].
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2Token >> properties [
 	^ properties
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2Token >> properties: newProperties [
 	^ properties := newProperties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Token >> size [
 	"Answer the size of this token in the underlying collection."
 
 	^ stop - start + 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Token >> start [
 	^ start
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Token >> start: anObject [
 	start := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Token >> stop [
 	^ stop
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Token >> stop: anObject [
 	stop := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2Token >> toString [
 	^ self value, '[', start, ',', stop ,']'
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 PP2Token >> value [
 	^ collection copyFrom: start to: stop
 ]

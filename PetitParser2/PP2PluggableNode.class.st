@@ -12,65 +12,67 @@ Example:
 parse: 'a'
 "
 Class {
-	#name : #PP2PluggableNode,
-	#superclass : #PP2Node,
+	#name : 'PP2PluggableNode',
+	#superclass : 'PP2Node',
 	#instVars : [
 		'block'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2PluggableNode class >> on: block [
 	^ self new
 		block: block;
 		yourself
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2PluggableNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitPluggable: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PluggableNode >> block [
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PluggableNode >> block: anObject [
 	block := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PluggableNode >> firstCharSet [
 	^ PP2UnknownCharSetPredicate instance
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2PluggableNode >> isFirstSetTerminal [
 	"lets be conservative here"
 	^ true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2PluggableNode >> localEquals: anotherNode [
 	(super localEquals: anotherNode) ifFalse: [ ^ false ].
 	
 	^ (self block printString = anotherNode block printString)
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2PluggableNode >> localHash [
 	^ super localHash bitXor: self block printString hash
 ]
 
-{ #category : #'parsing - private' }
+{ #category : 'parsing - private' }
 PP2PluggableNode >> parseOn: aPP2Context [
 	^ strategy parseOn: aPP2Context 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2PluggableNode >> resetStrategy [
 	strategy := PP2Pluggable on: self
 ]

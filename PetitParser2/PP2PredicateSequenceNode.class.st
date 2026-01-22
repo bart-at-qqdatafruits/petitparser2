@@ -2,27 +2,29 @@
 Matches if next 'size' characters in input satisfy the given predicate.
 "
 Class {
-	#name : #PP2PredicateSequenceNode,
-	#superclass : #PP2PredicateNode,
+	#name : 'PP2PredicateSequenceNode',
+	#superclass : 'PP2PredicateNode',
 	#instVars : [
 		'size'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2PredicateSequenceNode class >> on: predicate message: message size: size [
 	^ (self on: predicate message: message)
 		size: size;
 		yourself
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2PredicateSequenceNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitPredicateSequence: self
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2PredicateSequenceNode >> firstCharSet [
 	"
 		TODO(JanKurs): We can optimize a bit here. For example, for 
@@ -33,19 +35,19 @@ PP2PredicateSequenceNode >> firstCharSet [
 	^ PP2UnknownCharSetPredicate new
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2PredicateSequenceNode >> localEquals: anotherNode [
 	(super localEquals: anotherNode) ifFalse: [ ^ false ].
 	
 	^ self size = anotherNode size
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2PredicateSequenceNode >> localHash [
 	^ super localHash bitXor: size hash
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2PredicateSequenceNode >> negate [
 	"Answer a parser that is the negation of the receiving predicate parser."
 	
@@ -54,17 +56,17 @@ PP2PredicateSequenceNode >> negate [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2PredicateSequenceNode >> resetStrategy [
 	strategy := PP2PredicateSequence on: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateSequenceNode >> size [
 	^ size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PredicateSequenceNode >> size: anObject [
 	size := anObject
 ]

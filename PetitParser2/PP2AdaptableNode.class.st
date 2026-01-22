@@ -4,46 +4,48 @@ This node is refers to a subset of grammar that changes dynamically, during pars
 The node is used to tell PP2 optimizations that input parsed by this node can change at any time.
 "
 Class {
-	#name : #PP2AdaptableNode,
-	#superclass : #PP2Node,
+	#name : 'PP2AdaptableNode',
+	#superclass : 'PP2Node',
 	#instVars : [
 		'child'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2AdaptableNode >> accept: visitor [
 	^ visitor visitAdaptable: self
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 PP2AdaptableNode >> changeChild: newChild [
 	child := newChild
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2AdaptableNode >> child [
 	^ child
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2AdaptableNode >> children [
 	^ child isNil ifTrue: [ Array new ] ifFalse: [ Array with: child ]
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2AdaptableNode >> isAdaptable [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2AdaptableNode >> isFirstSetTerminal [
 	^ false
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 PP2AdaptableNode >> resetStrategy [
 	strategy := PP2Delegate on: self
 ]

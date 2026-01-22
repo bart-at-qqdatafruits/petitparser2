@@ -4,15 +4,17 @@ Matches empty string, always succeeds.
 #epsilon asPParser parse: ''
 "
 Class {
-	#name : #PP2EpsilonNode,
-	#superclass : #PP2Node,
+	#name : 'PP2EpsilonNode',
+	#superclass : 'PP2Node',
 	#classInstVars : [
 		'instance'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EpsilonNode class >> instance [
 	instance isNil ifTrue: [ 
 		instance := PP2EpsilonNode basicNew initialize
@@ -21,32 +23,32 @@ PP2EpsilonNode class >> instance [
 	^ instance
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2EpsilonNode class >> new [
 	^ self instance
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2EpsilonNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitEpsilon: self
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2EpsilonNode >> firstCharSet [
 	^ PP2CharSetPredicate any
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2EpsilonNode >> isEpsilon [
 	^ true
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2EpsilonNode >> nonEpsilon [
 	^	#failure asPParser
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2EpsilonNode >> resetStrategy [
 	strategy := PP2Epsilon on: self
 ]

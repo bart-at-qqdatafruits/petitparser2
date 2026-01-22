@@ -1,20 +1,22 @@
 Class {
-	#name : #PP2UnresolvedNode,
-	#superclass : #PP2Node,
-	#category : 'PetitParser2-Core'
+	#name : 'PP2UnresolvedNode',
+	#superclass : 'PP2Node',
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2UnresolvedNode >> isUnresolved [
 	^ true
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2UnresolvedNode >> parseOn: aStream [
 	self error: self printString , ' need to be resolved before execution.'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2UnresolvedNode >> resetStrategy [
 	"nothing to do here"
 ]

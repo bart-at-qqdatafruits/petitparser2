@@ -2,44 +2,46 @@
 Represents 'water' element in bounded seas: imprecise and tolerant parsers. See http://kursjan.github.io/petitparser2/ for more information.
 "
 Class {
-	#name : #PP2WaterNode,
-	#superclass : #PP2Node,
+	#name : 'PP2WaterNode',
+	#superclass : 'PP2Node',
 	#instVars : [
 		'boundary',
 		'waterToken'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2WaterNode class >> boundary: aPP2Node [
 	^ (self new) 
 		boundary: aPP2Node;
 		yourself
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2WaterNode >> accept: visitor [
 	^ visitor visitWater: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2WaterNode >> boundary [
 	^ boundary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2WaterNode >> boundary: anObject [
 	self boundaryElements: (self toCollection: anObject)
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2WaterNode >> boundaryElements [
 	^ boundary children collect: #child
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2WaterNode >> boundaryElements: collectionOrElement [
 	| elements |
 	elements := collectionOrElement isCollection ifTrue: [ collectionOrElement ] ifFalse: [ OrderedCollection with: collectionOrElement ].
@@ -59,12 +61,12 @@ PP2WaterNode >> boundaryElements: collectionOrElement [
 	self strategy isDebugging ifTrue: [ boundary enableDebug ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2WaterNode >> children [
 	^ Array with: boundary with: waterToken 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2WaterNode >> initialize [
 	super initialize.
 	
@@ -72,17 +74,17 @@ PP2WaterNode >> initialize [
 	boundary := (PP2ChoiceNode with: PP2EndOfInputNode new and).
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2WaterNode >> nonEpsilon: node [
 	^ node isNullable ifTrue: [ node nonEpsilon  ] ifFalse: [ node ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2WaterNode >> rejectPossessive: node [
 	^ node selfSkipDelegate isRepeating ifTrue: [ node child  ] ifFalse: [ node ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2WaterNode >> rejectSeas: nodeOrDelegate [
 	| node |
 	node := nodeOrDelegate selfSkipDelegate.
@@ -90,24 +92,24 @@ PP2WaterNode >> rejectSeas: nodeOrDelegate [
 	^ node isSea ifTrue: [ node island  ] ifFalse: [ node ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2WaterNode >> resetStrategy [
 	strategy := PP2Water on: self
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 PP2WaterNode >> toCollection: object [
 	object isCollection ifTrue: [ ^ object ].
 	
-	^ OrderedColllection with: object 
+	^ OrderedCollection with: object 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2WaterNode >> waterToken [
 	^ waterToken
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2WaterNode >> waterToken: anObject [
 	waterToken := anObject
 ]

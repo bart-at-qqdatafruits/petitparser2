@@ -2,27 +2,29 @@
 Rewriting visitor. Handles cycles.
 "
 Class {
-	#name : #PP2TransformVisitor,
-	#superclass : #PP2NoopVisitor,
+	#name : 'PP2TransformVisitor',
+	#superclass : 'PP2NoopVisitor',
 	#instVars : [
 		'predicate',
 		'block',
 		'mapping'
 	],
-	#category : #'PetitParser2-Core'
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TransformVisitor >> block [
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TransformVisitor >> block: anObject [
 	block := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2TransformVisitor >> initialize [
 	super initialize.
 
@@ -32,7 +34,7 @@ PP2TransformVisitor >> initialize [
 	mapping := IdentityDictionary new.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2TransformVisitor >> initializeMapping: rootNode [
 	| transformed |
 	
@@ -45,29 +47,29 @@ PP2TransformVisitor >> initializeMapping: rootNode [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2TransformVisitor >> openedResultFor: context [
 	"when visiting opened node, return the transformed value"
 	^ self transformed: context node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TransformVisitor >> predicate [
 	^ predicate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TransformVisitor >> predicate: anObject [
 	predicate := anObject
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2TransformVisitor >> transformed: node [
 	^ mapping at: node ifAbsent: [ node ].
 	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2TransformVisitor >> visitPP2Node: node [
 	| transformed transformedChild |
 	self isRoot ifTrue: [ self initializeMapping: node ].

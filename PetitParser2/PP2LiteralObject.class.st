@@ -2,17 +2,19 @@
 Default strategy for PP2LiteralObjectNode.
 "
 Class {
-	#name : #PP2LiteralObject,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2LiteralObject',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2LiteralObject >> initializeFor: aPP2Node [
 	super initializeFor: aPP2Node
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2LiteralObject >> parseOn: aPP2Context [
 	| literal |
 	literal := node literal.

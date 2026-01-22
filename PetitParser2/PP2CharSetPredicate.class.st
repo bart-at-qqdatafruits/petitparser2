@@ -4,41 +4,43 @@ Cache for character set. Pre-evaluates block for the first 255 characters and re
 Serves as parsing optimization, if the next character in a stream does not match, the whole parser is going to fail. 
 "
 Class {
-	#name : #PP2CharSetPredicate,
-	#superclass : #Object,
+	#name : 'PP2CharSetPredicate',
+	#superclass : 'Object',
 	#instVars : [
 		'block',
 		'classification'
 	],
-	#category : #'PetitParser2-Tools'
+	#category : 'PetitParser2-Tools',
+	#package : 'PetitParser2',
+	#tag : 'Tools'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2CharSetPredicate class >> any [
 	^ self on: [ :e | true ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2CharSetPredicate class >> empty [
 	^ self on: [ :e | false ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2CharSetPredicate class >> on: aBlock [
 	^ self basicNew initializeOn: aBlock
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2CharSetPredicate >> asCharSetPredicate [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2CharSetPredicate >> classification [
 	^ classification
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2CharSetPredicate >> initializeOn: aBlock [
 	block := aBlock.
 	classification := Array new: 255.
@@ -47,12 +49,12 @@ PP2CharSetPredicate >> initializeOn: aBlock [
 			value: (Character codePoint: index)) ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2CharSetPredicate >> isUnknown [
 	^ false
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 PP2CharSetPredicate >> value: aCharacter [
 	| index |
 	index := aCharacter asInteger.

@@ -2,22 +2,24 @@
 Matches end of a line.
 "
 Class {
-	#name : #PP2EndOfLineNode,
-	#superclass : #PP2Node,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2EndOfLineNode',
+	#superclass : 'PP2Node',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2EndOfLineNode >> accept: visitor [
 	^ visitor visitEndOfLine: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EndOfLineNode >> firstCharSet [
 	^ PP2UnknownCharSetPredicate instance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EndOfLineNode >> resetStrategy [
 	strategy := PP2EndOfLine on: self
 ]

@@ -1,15 +1,17 @@
 Class {
-	#name : #PP2SequenceOfThree,
-	#superclass : #PP2Sequence,
+	#name : 'PP2SequenceOfThree',
+	#superclass : 'PP2Sequence',
 	#instVars : [
 		'firstChild',
 		'secondChild',
 		'thirdChild'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2SequenceOfThree >> initializeFor: aPP2SequenceNode [
 	super initializeFor: aPP2SequenceNode.
 	
@@ -18,7 +20,7 @@ PP2SequenceOfThree >> initializeFor: aPP2SequenceNode [
 	thirdChild := aPP2SequenceNode thirdChild.
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2SequenceOfThree >> parseOn: context [
 	| retval elements memento |
 	memento := self remember: context.

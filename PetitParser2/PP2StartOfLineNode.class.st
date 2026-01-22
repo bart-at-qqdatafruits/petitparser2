@@ -5,17 +5,19 @@ Example:
 #startOfLine asPParser parse: ''
 "
 Class {
-	#name : #PP2StartOfLineNode,
-	#superclass : #PP2Node,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2StartOfLineNode',
+	#superclass : 'PP2Node',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2StartOfLineNode >> accept: visitor [
 	^ visitor visitStartOfLine: self
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2StartOfLineNode >> firstCharSet [
 	"
 	 Because the start of a line is not 'real' character in the input stream,
@@ -24,7 +26,7 @@ PP2StartOfLineNode >> firstCharSet [
 	^ PP2UnknownCharSetPredicate instance
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2StartOfLineNode >> resetStrategy [
 	strategy := PP2StartOfLine on: self
 ]

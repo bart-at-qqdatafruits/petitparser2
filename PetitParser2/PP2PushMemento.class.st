@@ -1,29 +1,31 @@
 Class {
-	#name : #PP2PushMemento,
-	#superclass : #Object,
+	#name : 'PP2PushMemento',
+	#superclass : 'Object',
 	#instVars : [
 		'position',
 		'stackSize'
 	],
-	#category : 'PetitParser2-Context'
+	#category : 'PetitParser2-Context',
+	#package : 'PetitParser2',
+	#tag : 'Context'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PushMemento >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PushMemento >> position: anObject [
 	position := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PushMemento >> stackSize [
 	^ stackSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2PushMemento >> stackSize: anObject [
 	stackSize := anObject
 ]

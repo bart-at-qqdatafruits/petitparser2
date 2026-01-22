@@ -2,8 +2,8 @@
 PP2 Wrapper around stream. Contains additional state to used by PP2.
 "
 Class {
-	#name : #PP2Context,
-	#superclass : #Object,
+	#name : 'PP2Context',
+	#superclass : 'Object',
 	#traits : 'TPP2Globals + TPP2Properties + TPP2Debuggable + TPP2Context',
 	#classTraits : 'TPP2Globals classTrait + TPP2Properties classTrait + TPP2Debuggable classTrait + TPP2Context classTrait',
 	#instVars : [
@@ -15,15 +15,17 @@ Class {
 		'startMemento',
 		'properties'
 	],
-	#category : #'PetitParser2-Core'
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2Context class >> on: stream [
 	^ self on: stream position: 0
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2Context class >> on: stream position: position [
 	^ self new 
 		stream: stream;
@@ -31,29 +33,29 @@ PP2Context class >> on: stream position: position [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2Context >> asPositionableStream [
 	^ (ReadStream on: stream collection)
 		position: position;
 		yourself
 ]
 
-{ #category : #'stream mimicry' }
+{ #category : 'stream mimicry' }
 PP2Context >> atEnd [
 	^ stream atEnd: position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Context >> contents [
 	^ stream contents
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 PP2Context >> copyFrom: start to: end [
 	^ stream copyFrom: start to: end
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 PP2Context >> debugResult [
 	^ self globalAt: #debugResult ifAbsentPut: [ 
 		| context |
@@ -64,32 +66,32 @@ PP2Context >> debugResult [
 	]
 ]
 
-{ #category : #'accessing-globals' }
+{ #category : 'accessing-globals' }
 PP2Context >> globals [
 	^ globals
 ]
 
-{ #category : #'accessing-globals' }
+{ #category : 'accessing-globals' }
 PP2Context >> globals: anObject [
 	^ globals := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Context >> initialize [
 	super initialize
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2Context >> isPetit2Context [
 	^ true
 ]
 
-{ #category : #tokenization }
+{ #category : 'tokenization' }
 PP2Context >> newToken: tokenClass from: start [
 	^ stream newToken: tokenClass from: start + 1 to: position
 ]
 
-{ #category : #'stream mimicry' }
+{ #category : 'stream mimicry' }
 PP2Context >> next [
 	^ (stream atEnd: position) not ifTrue: [ 
 		position := position + 1.
@@ -99,7 +101,7 @@ PP2Context >> next [
 	]
 ]
 
-{ #category : #'stream mimicry' }
+{ #category : 'stream mimicry' }
 PP2Context >> next: size [
 	^ ((stream atEnd: position + size - 1) not) ifTrue: [ 
 		stream copyFrom: (position + 1) to: (position := position + size)
@@ -108,7 +110,7 @@ PP2Context >> next: size [
 	]
 ]
 
-{ #category : #'stream mimicry' }
+{ #category : 'stream mimicry' }
 PP2Context >> nextFor: aCharacter [
 	^ (stream atEnd: position) not ifTrue: [ 
 		position := position + 1.
@@ -120,24 +122,24 @@ PP2Context >> nextFor: aCharacter [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Context >> parser [
 	^ parser
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Context >> parser: aPP2Parser [
 	parser := aPP2Parser 
 ]
 
-{ #category : #'stream mimicry' }
+{ #category : 'stream mimicry' }
 PP2Context >> peek [
 	^ (stream atEnd: position) not ifTrue: [ 
 		stream atPosition: position + 1
 	]
 ]
 
-{ #category : #'stream mimicry' }
+{ #category : 'stream mimicry' }
 PP2Context >> peekBack [
 "
 	Funny, stream throws an exception, so I should too :)	
@@ -151,7 +153,7 @@ PP2Context >> peekBack [
 
 ]
 
-{ #category : #'stream mimicry' }
+{ #category : 'stream mimicry' }
 PP2Context >> peekFor: anObject [ 
 	"Answer false and do not move over the next element if it is not equal to 
 	the argument, anObject, or if the receiver is at the end. Answer true 
@@ -167,17 +169,17 @@ PP2Context >> peekFor: anObject [
 	^false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Context >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Context >> position: anInteger [
 	position := anInteger
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 PP2Context >> postCopy [
 	super postCopy.
 
@@ -185,7 +187,7 @@ PP2Context >> postCopy [
 	
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2Context >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $:.
@@ -193,17 +195,17 @@ PP2Context >> printOn: aStream [
 	stream printOn: aStream
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2Context >> properties [
 	^ properties
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 PP2Context >> properties: newProperties [
 	^ properties := newProperties
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Context >> remember [
 	^ PP2ContextMemento new
 		stream: stream;
@@ -213,74 +215,74 @@ PP2Context >> remember [
 
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Context >> rememberPosition [
 	^ position
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Context >> reset [
 	globals := nil
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Context >> restore: contextMemento [
 	position := contextMemento position.
 	properties := contextMemento propertiesCopy.
 ]
 
-{ #category : #memoization }
+{ #category : 'memoization' }
 PP2Context >> restorePosition: anInteger [
 	position := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Context >> returnValue [
 	^ returnValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Context >> returnValue: anObject [
 	returnValue := anObject
 ]
 
-{ #category : #'stream extras' }
+{ #category : 'stream extras' }
 PP2Context >> shift [
 	position := position + 1
 ]
 
-{ #category : #requirements }
+{ #category : 'requirements' }
 PP2Context >> startMemento [
 	^ startMemento
 ]
 
-{ #category : #requirements }
+{ #category : 'requirements' }
 PP2Context >> startMemento: anObject [
 	startMemento := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Context >> stream [
 	^ stream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2Context >> stream: aStream [
 	stream := aStream
 ]
 
-{ #category : #'stream extras' }
+{ #category : 'stream extras' }
 PP2Context >> uncheckedNext [
 	position := position + 1.
 	^ stream atPosition: position
 ]
 
-{ #category : #'stream extras' }
+{ #category : 'stream extras' }
 PP2Context >> uncheckedPeek [
 	^ stream atPosition: position + 1
 ]
 
-{ #category : #'stream mimicry' }
+{ #category : 'stream mimicry' }
 PP2Context >> upTo: character [
 	| start |
 	start := position := position + 1.
@@ -298,7 +300,7 @@ PP2Context >> upTo: character [
 
 ]
 
-{ #category : #'stream mimicry' }
+{ #category : 'stream mimicry' }
 PP2Context >> upToEnd [
 	| start |
 	start := position.
@@ -307,7 +309,7 @@ PP2Context >> upToEnd [
 	^ stream copyFrom: start + 1 to: position
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 PP2Context >> value [
 	^ returnValue
 ]

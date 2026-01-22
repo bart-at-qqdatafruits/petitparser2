@@ -4,17 +4,19 @@ todo: Refactor to two strategies:
 - debugging
 "
 Class {
-	#name : #PP2RecordingDebuggingStrategy,
-	#superclass : #PP2DebuggingStrategy,
-	#category : 'PetitParser2-Recording'
+	#name : 'PP2RecordingDebuggingStrategy',
+	#superclass : 'PP2DebuggingStrategy',
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2RecordingDebuggingStrategy >> isRecording [
 	^ true
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2RecordingDebuggingStrategy >> parseOn: context [
 	| result entry |
 	self node hasName ifTrue: [ context namedInvoked 	] ifFalse: [ context invoked ].
@@ -32,7 +34,7 @@ PP2RecordingDebuggingStrategy >> parseOn: context [
 	^ result
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2RecordingDebuggingStrategy >> recording [
 	^ self
 ]

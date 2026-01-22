@@ -1,15 +1,17 @@
 Class {
-	#name : #PP2FirstProductionSetCache,
-	#superclass : #PP2FirstSetVisitor,
-	#category : 'PetitParser2-Optimizations'
+	#name : 'PP2FirstProductionSetCache',
+	#superclass : 'PP2FirstSetVisitor',
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 PP2FirstProductionSetCache >> afterAccept: ctx result: result [
 	ctx node propertyAt: #firstProductionSet ifAbsentPut: result
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2FirstProductionSetCache >> doPass: node [
 	| allNodes child |
 	self visit: node.
@@ -21,7 +23,7 @@ PP2FirstProductionSetCache >> doPass: node [
 	]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2FirstProductionSetCache >> initialize [
 	super initialize.
 	predicateBlock := [ :e | e isProduction  ]

@@ -15,22 +15,24 @@ Note that #starLazy consumes as little as possible, contrary to your expectation
 
 "
 Class {
-	#name : #PP2PossesiveRepeatingNode,
-	#superclass : #PP2RepeatingNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2PossesiveRepeatingNode',
+	#superclass : 'PP2RepeatingNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2PossesiveRepeatingNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitPossesiveRepeating: self
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2PossesiveRepeatingNode >> hash [
 	^ super hash bitXor: (min hash bitXor: max hash)
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2PossesiveRepeatingNode >> localEquals: anotherNode [
 	(super localEquals: anotherNode) ifFalse: [ ^ false ].
 	
@@ -39,7 +41,7 @@ PP2PossesiveRepeatingNode >> localEquals: anotherNode [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2PossesiveRepeatingNode >> resetStrategy [
 	strategy := PP2PossesiveRepeating on: self
 ]

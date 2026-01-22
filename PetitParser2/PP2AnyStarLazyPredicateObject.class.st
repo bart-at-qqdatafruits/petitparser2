@@ -1,20 +1,22 @@
 Class {
-	#name : #PP2AnyStarLazyPredicateObject,
-	#superclass : #PP2StarLazy,
+	#name : 'PP2AnyStarLazyPredicateObject',
+	#superclass : 'PP2StarLazy',
 	#instVars : [
 		'predicate'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2AnyStarLazyPredicateObject class >> on: node predicate: predicate [
 	^ (super on: node)
 		predicate: predicate;
 		yourself
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2AnyStarLazyPredicateObject >> parseOn: context [
 	| retval position |
 
@@ -36,12 +38,12 @@ PP2AnyStarLazyPredicateObject >> parseOn: context [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2AnyStarLazyPredicateObject >> predicate [
 	^ predicate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2AnyStarLazyPredicateObject >> predicate: newPredicate [
 	predicate := newPredicate 
 ]

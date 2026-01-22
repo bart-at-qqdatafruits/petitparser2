@@ -1,12 +1,14 @@
 Class {
-	#name : #PP2IsNullableCache,
-	#superclass : #PP2IsNullableVisitor,
+	#name : 'PP2IsNullableCache',
+	#superclass : 'PP2IsNullableVisitor',
 	#traits : 'TPP2AnalysisCache',
 	#classTraits : 'TPP2AnalysisCache classTrait',
-	#category : 'PetitParser2-Optimizations'
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2IsNullableCache >> doPass: node [
 	| children child |
 	self visit: node.
@@ -18,7 +20,7 @@ PP2IsNullableCache >> doPass: node [
 	]
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2IsNullableCache >> propertySymbol [
 	^ #isNullable
 ]

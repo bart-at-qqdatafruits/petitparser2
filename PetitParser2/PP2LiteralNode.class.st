@@ -2,21 +2,23 @@
 Abstract literal parser that parses some kind of literal type (to be specified by subclasses).
 "
 Class {
-	#name : #PP2LiteralNode,
-	#superclass : #PP2Node,
+	#name : 'PP2LiteralNode',
+	#superclass : 'PP2Node',
 	#instVars : [
 		'literal',
 		'message'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2LiteralNode class >> on: literal [
 	^ self on: literal message: 'literal ', literal printString, ' expected'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2LiteralNode class >> on: literal message: message [
 	^ self new
 		literal: literal;
@@ -24,22 +26,22 @@ PP2LiteralNode class >> on: literal message: message [
 		yourself
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2LiteralNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitLiteral: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2LiteralNode >> literal [
 	^ literal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2LiteralNode >> literal: anObject [
 	literal := anObject
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2LiteralNode >> localEquals: anotherNode [
 	(super localEquals: anotherNode) ifFalse: [ ^ false ].
 	
@@ -49,17 +51,17 @@ PP2LiteralNode >> localEquals: anotherNode [
 	^ true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2LiteralNode >> localHash [
 	^ super localHash bitXor: (self literal hash bitXor: self message hash)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2LiteralNode >> message [
 	^ message
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2LiteralNode >> message: anObject [
 	message := anObject
 ]

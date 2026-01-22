@@ -1,50 +1,52 @@
 Class {
-	#name : #PP2EventRecord,
-	#superclass : #Object,
+	#name : 'PP2EventRecord',
+	#superclass : 'Object',
 	#instVars : [
 		'event',
 		'position',
 		'strategy'
 	],
-	#category : 'PetitParser2-Recording'
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventRecord >> event [
 	^ event
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventRecord >> event: anObject [
 	event := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2EventRecord >> isInvocation [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventRecord >> node [
 	^ strategy node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventRecord >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventRecord >> position: anObject [
 	position := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventRecord >> strategy [
 	^ strategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2EventRecord >> strategy: anObject [
 	strategy := anObject
 ]

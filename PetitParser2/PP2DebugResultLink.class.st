@@ -1,71 +1,73 @@
 Class {
-	#name : #PP2DebugResultLink,
-	#superclass : #Object,
+	#name : 'PP2DebugResultLink',
+	#superclass : 'Object',
 	#instVars : [
 		'reference'
 	],
-	#category : 'PetitParser2-Debug'
+	#category : 'PetitParser2-Debug',
+	#package : 'PetitParser2',
+	#tag : 'Debug'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2DebugResultLink class >> on: aPP2DebugResult [
 	^ (self new)
 		reference: aPP2DebugResult;
 		yourself
 ]
 
-{ #category : #analysis }
+{ #category : 'analysis' }
 PP2DebugResultLink >> allResults [
 	^ #()
 ]
 
-{ #category : #analysis }
+{ #category : 'analysis' }
 PP2DebugResultLink >> allResultsTo: aSet [
 	^ aSet
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2DebugResultLink >> asEventsMorph [
 	^ reference asEventsMorph
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResultLink >> children [
 	^ Array with: reference 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResultLink >> contents [
 	^ reference contents
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResultLink >> debugResult [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2DebugResultLink >> formattedText [
 	^ Text string: self printString attribute: (TextColor new color: Color blue muchDarker)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PP2DebugResultLink >> printOn: aStream [ 
 	super printOn: aStream.
 	aStream nextPutAll: ': reference'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResultLink >> reference [
 	^ reference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResultLink >> reference: anObject [
 	reference := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2DebugResultLink >> startStopInterval [
 	^ reference startStopInterval
 ]

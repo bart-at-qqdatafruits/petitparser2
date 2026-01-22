@@ -2,17 +2,19 @@
 Default strategy for PP2Sea.
 "
 Class {
-	#name : #PP2Sea,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2Sea',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2Sea >> memoize [
 	^ PP2MemoizedSea on: self
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Sea >> parseOn: context [
 
 	| awr bwr ir memento |

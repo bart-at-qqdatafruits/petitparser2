@@ -4,33 +4,35 @@ Implementation of stream filled by asynchronous input. Can be converted to PP2St
 For example, keyboard source can be used as an input to PetitParser2.
 "
 Class {
-	#name : #PP2AsyncStream,
-	#superclass : #Object,
+	#name : 'PP2AsyncStream',
+	#superclass : 'Object',
 	#instVars : [
 		'queue',
 		'closed'
 	],
-	#category : #'PetitParser2-Streams'
+	#category : 'PetitParser2-Streams',
+	#package : 'PetitParser2',
+	#tag : 'Streams'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PP2AsyncStream >> asPetit2Stream [
 	^ PP2BufferStream on: self
 ]
 
-{ #category : #'minimal interface' }
+{ #category : 'minimal interface' }
 PP2AsyncStream >> atEnd [
 	^ queue isEmpty and: closed
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 PP2AsyncStream >> close [
 	closed := true.
 	"I need to queue some character at the end, because next is waiting for an input"
 	queue addLast: (Character codePoint: 4).
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2AsyncStream >> initialize [
 	super initialize.
 	
@@ -38,7 +40,7 @@ PP2AsyncStream >> initialize [
 	queue := OrderedCollection new.	
 ]
 
-{ #category : #'minimal interface' }
+{ #category : 'minimal interface' }
 PP2AsyncStream >> next [
 	| delay |
 	"
@@ -50,7 +52,7 @@ PP2AsyncStream >> next [
 	^  queue removeFirst
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 PP2AsyncStream >> queueChar: aCharacter [
 	closed ifFalse: [  queue addLast: aCharacter ]
 

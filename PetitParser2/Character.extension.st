@@ -1,6 +1,6 @@
-Extension { #name : #Character }
+Extension { #name : 'Character' }
 
-{ #category : #'*petitparser2' }
+{ #category : '*petitparser2' }
 Character >> asPParser [
 	"Answer a parser that accepts the receiving character."
 	

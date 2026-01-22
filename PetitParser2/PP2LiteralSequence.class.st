@@ -2,12 +2,14 @@
 Default strategy for PP2LiteralSequenceNode.
 "
 Class {
-	#name : #PP2LiteralSequence,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2LiteralSequence',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2LiteralSequence >> parseOn: aPP2Context [
 	| position |
 	position := aPP2Context rememberPosition.

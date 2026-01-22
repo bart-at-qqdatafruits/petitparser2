@@ -6,17 +6,19 @@ Example:
   parse: 'ab'
 "
 Class {
-	#name : #PP2MappingNode,
-	#superclass : #PP2AbstractActionNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2MappingNode',
+	#superclass : 'PP2AbstractActionNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2MappingNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitMapping: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2MappingNode >> resetStrategy [
 	strategy := PP2Mapping on: self
 ]

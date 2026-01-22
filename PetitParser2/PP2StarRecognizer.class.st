@@ -1,10 +1,12 @@
 Class {
-	#name : #PP2StarRecognizer,
-	#superclass : #PP2PossesiveRepeating,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2StarRecognizer',
+	#superclass : 'PP2PossesiveRepeating',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2StarRecognizer >> parseOn: aPP2Context [
 	| retval |
 		
@@ -13,7 +15,7 @@ PP2StarRecognizer >> parseOn: aPP2Context [
 
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2StarRecognizer >> parsingGuard: classification [
 	^ (super parsingGuard: classification)
 		retval: #();

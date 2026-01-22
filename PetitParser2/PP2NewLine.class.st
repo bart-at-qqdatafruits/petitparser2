@@ -2,22 +2,24 @@
 Default strategy for PP2NewLineNode.
 "
 Class {
-	#name : #PP2NewLine,
-	#superclass : #PP2Strategy,
+	#name : 'PP2NewLine',
+	#superclass : 'PP2Strategy',
 	#instVars : [
 		'failure'
 	],
-	#category : #'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2NewLine >> initializeFor: aPP2Node [
 	super initializeFor: aPP2Node.
 	failure := PP2Failure message: 'new line expected'
 
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2NewLine >> parseOn: context [
 	context atEnd ifTrue: [ ^ failure ].
 	

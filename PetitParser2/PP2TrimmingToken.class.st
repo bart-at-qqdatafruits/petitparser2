@@ -1,15 +1,17 @@
 Class {
-	#name : #PP2TrimmingToken,
-	#superclass : #PP2Strategy,
+	#name : 'PP2TrimmingToken',
+	#superclass : 'PP2Strategy',
 	#instVars : [
 		'tokenClass',
 		'trimmer',
 		'tokenChild'
 	],
-	#category : 'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2TrimmingToken >> initializeFor: aNode [
 	super initializeFor: aNode.
 	
@@ -18,7 +20,7 @@ PP2TrimmingToken >> initializeFor: aNode [
 	trimmer := aNode trimmer.
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2TrimmingToken >> parseOn: context [
 	| position retval start |
 	position := context rememberPosition.
@@ -35,32 +37,32 @@ PP2TrimmingToken >> parseOn: context [
 	^ retval
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TrimmingToken >> tokenChild [
 	^ tokenChild
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TrimmingToken >> tokenChild: anObject [
 	tokenChild := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TrimmingToken >> tokenClass [
 	^ tokenClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TrimmingToken >> tokenClass: anObject [
 	tokenClass := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TrimmingToken >> trimmer [
 	^ trimmer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2TrimmingToken >> trimmer: anObject [
 	trimmer := anObject
 ]

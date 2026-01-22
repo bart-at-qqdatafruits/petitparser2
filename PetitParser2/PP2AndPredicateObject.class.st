@@ -2,22 +2,24 @@
 Optimization for 'PP2And -> PP2PredicateObject' combinator.
 "
 Class {
-	#name : #PP2AndPredicateObject,
-	#superclass : #PP2And,
+	#name : 'PP2AndPredicateObject',
+	#superclass : 'PP2And',
 	#instVars : [
 		'predicate',
 		'literal'
 	],
-	#category : #'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2AndPredicateObject >> initializeFor: aNode [
 	super initializeFor: aNode.
 	predicate := aNode child predicate
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PP2AndPredicateObject >> parseOn: context [
 	| peek |
 	peek := context peek.

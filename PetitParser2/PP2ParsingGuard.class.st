@@ -4,27 +4,29 @@ If the following input matches classification, returns result without invoking t
 The result is typically PP2Failure. Guard is used to fail choices early, without invoking them.
 "
 Class {
-	#name : #PP2ParsingGuard,
-	#superclass : #PP2WrappingStrategy,
+	#name : 'PP2ParsingGuard',
+	#superclass : 'PP2WrappingStrategy',
 	#instVars : [
 		'classification',
 		'retval'
 	],
-	#category : #'PetitParser2-Strategies'
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ParsingGuard >> classification [
 	^ classification 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ParsingGuard >> classification: anArray [
 	"I am experimenting with smaller classification, but not 100% sure this improves performance"
 	classification := (anArray copyFrom: 1 to: 128)
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2ParsingGuard >> parseOn: context [
 	| intValue |
 	context atEnd ifTrue: [ ^ retval ].
@@ -44,19 +46,19 @@ PP2ParsingGuard >> parseOn: context [
 
 ]
 
-{ #category : #conversion }
+{ #category : 'conversion' }
 PP2ParsingGuard >> parsingGuard: anArray [
 	self
 		assert: classification = (anArray copyFrom: 1 to: classification size).
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ParsingGuard >> retval [
 	^ retval 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ParsingGuard >> retval: anObject [
 	retval := anObject
 ]

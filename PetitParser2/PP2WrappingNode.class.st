@@ -2,22 +2,24 @@
 Performs an action block upon activation with the stream and a continuation block.
 "
 Class {
-	#name : #PP2WrappingNode,
-	#superclass : #PP2AbstractActionNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2WrappingNode',
+	#superclass : 'PP2AbstractActionNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2WrappingNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitWrapping: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 PP2WrappingNode >> doesFunctionalChanges [
 	^ self propertyAt: #functionalChanges
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2WrappingNode >> firstCharSet [
 	^ self doesFunctionalChanges ifTrue: [ 
 		PP2UnknownCharSetPredicate instance
@@ -26,18 +28,18 @@ PP2WrappingNode >> firstCharSet [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2WrappingNode >> functionalChanges: aBoolean [
 	self propertyAt: #functionalChanges put: aBoolean
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2WrappingNode >> initialize [
 	super initialize.
 	self functionalChanges: true.
 ]
 
-{ #category : #'analysis - first' }
+{ #category : 'analysis - first' }
 PP2WrappingNode >> isFirstSetTerminal [
 	"lets be conservative here"
 	self doesFunctionalChanges ifTrue: [  
@@ -48,7 +50,7 @@ PP2WrappingNode >> isFirstSetTerminal [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2WrappingNode >> resetStrategy [
 	strategy := PP2Wrapping on: self
 ]

@@ -2,17 +2,19 @@
 Default strategy for PP2WaterNode.
 "
 Class {
-	#name : #PP2Water,
-	#superclass : #PP2Strategy,
-	#category : #'PetitParser2-Strategies'
+	#name : 'PP2Water',
+	#superclass : 'PP2Strategy',
+	#category : 'PetitParser2-Strategies',
+	#package : 'PetitParser2',
+	#tag : 'Strategies'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2Water >> initializeFor: aPP2Node [
 	super initializeFor: aPP2Node
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 PP2Water >> parseOn: context [
 	| result contents memento startWaterPosition |
 	memento := self remember: context.

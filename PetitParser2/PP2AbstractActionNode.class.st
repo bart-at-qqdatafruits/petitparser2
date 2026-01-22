@@ -2,15 +2,17 @@
 Abstract base class for action nodes.
 "
 Class {
-	#name : #PP2AbstractActionNode,
-	#superclass : #PP2DelegateNode,
+	#name : 'PP2AbstractActionNode',
+	#superclass : 'PP2DelegateNode',
 	#instVars : [
 		'block'
 	],
-	#category : #'PetitParser2-Nodes'
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PP2AbstractActionNode class >> on: node block: aBlock [
 	^ self new
 		child: node;
@@ -18,26 +20,26 @@ PP2AbstractActionNode class >> on: node block: aBlock [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2AbstractActionNode >> block [
 	"Answer the action block of the receiver."
 
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2AbstractActionNode >> block: anObject [
 	block := anObject
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2AbstractActionNode >> localEquals: anotherNode [
 	(super localEquals: anotherNode) ifFalse: [ ^ false ].
 	
 	^ (self block printString = anotherNode block printString)
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2AbstractActionNode >> localHash [
 	^ super localHash bitXor: block printString hash
 ]

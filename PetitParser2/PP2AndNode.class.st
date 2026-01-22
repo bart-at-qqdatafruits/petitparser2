@@ -5,22 +5,24 @@ Example:
 $a asPParser and parse: 'a'
 "
 Class {
-	#name : #PP2AndNode,
-	#superclass : #PP2DelegateNode,
-	#category : #'PetitParser2-Nodes'
+	#name : 'PP2AndNode',
+	#superclass : 'PP2DelegateNode',
+	#category : 'PetitParser2-Nodes',
+	#package : 'PetitParser2',
+	#tag : 'Nodes'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2AndNode >> accept: aPP2Visitor [
 	^ aPP2Visitor visitAnd: self
 ]
 
-{ #category : #operators }
+{ #category : 'operators' }
 PP2AndNode >> and [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2AndNode >> resetStrategy [
 	strategy := PP2And on: self
 ]

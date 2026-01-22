@@ -1,37 +1,39 @@
 Class {
-	#name : #PP2RecordingPackrat,
-	#superclass : #PP2Packrat,
+	#name : 'PP2RecordingPackrat',
+	#superclass : 'PP2Packrat',
 	#traits : 'TPP2RecordingCache',
 	#classTraits : 'TPP2RecordingCache classTrait',
 	#instVars : [
 		'invocations',
 		'hits'
 	],
-	#category : 'PetitParser2-Recording'
+	#category : 'PetitParser2-Recording',
+	#package : 'PetitParser2',
+	#tag : 'Recording'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingPackrat >> hits [
 	^ hits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingPackrat >> hits: anObject [
 	hits := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2RecordingPackrat >> initialize [
 	super initialize.
 	self resetCounters.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingPackrat >> invocations [
 	^ invocations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecordingPackrat >> invocations: anObject [
 	invocations := anObject
 ]

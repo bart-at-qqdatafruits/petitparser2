@@ -1,10 +1,12 @@
 Class {
-	#name : #PP2CommonPrefixVisitor,
-	#superclass : #PP2NoopVisitor,
-	#category : 'PetitParser2-Optimizations'
+	#name : 'PP2CommonPrefixVisitor',
+	#superclass : 'PP2NoopVisitor',
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #caching }
+{ #category : 'caching' }
 PP2CommonPrefixVisitor >> cache: node [
 	node isCacheForbidden ifTrue: [ ^ self ].
 	node contextChanges isContextChange ifTrue: [ ^ self ].
@@ -13,7 +15,7 @@ PP2CommonPrefixVisitor >> cache: node [
 	node strategy: node strategy cache.
 ]
 
-{ #category : #'caching - choice' }
+{ #category : 'caching - choice' }
 PP2CommonPrefixVisitor >> cache: node production: production [
 	| strategy |
 	node isCacheForbidden ifTrue: [ ^ self ].
@@ -22,14 +24,14 @@ PP2CommonPrefixVisitor >> cache: node production: production [
 	node changeStrategy: strategy 
 ]
 
-{ #category : #caching }
+{ #category : 'caching' }
 PP2CommonPrefixVisitor >> cacheIfMakesSense: node [
 	(self cacheMakesSense: node) ifTrue: [  
 		self cache: node
 	]
 ]
 
-{ #category : #support }
+{ #category : 'support' }
 PP2CommonPrefixVisitor >> cacheMakesSense: production [
 	| node target |
 	node := production isJustDelegate ifTrue: [ production child ] ifFalse: [ production ].
@@ -42,7 +44,7 @@ PP2CommonPrefixVisitor >> cacheMakesSense: production [
 	^ (target propertyAt: #allNodesSize ifAbsentPut: [ node allNodes size ]) > 2
 ]
 
-{ #category : #'caching - choice' }
+{ #category : 'caching - choice' }
 PP2CommonPrefixVisitor >> cacheProductions: productions [
 	| names |
 	names := productions collect: [:p | p name ].
@@ -66,13 +68,13 @@ PP2CommonPrefixVisitor >> cacheProductions: productions [
 
 ]
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2CommonPrefixVisitor >> doPass: node [
 	^ self visit: node
 	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2CommonPrefixVisitor >> visitChoice: choice [
 	| productions |
 	super visitChoice: choice.
@@ -85,7 +87,7 @@ PP2CommonPrefixVisitor >> visitChoice: choice [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2CommonPrefixVisitor >> visitPP2Node: node [
 	node shouldCache ifTrue: [ 
 		self cache: node
@@ -93,7 +95,7 @@ PP2CommonPrefixVisitor >> visitPP2Node: node [
 	super visitPP2Node: node
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2CommonPrefixVisitor >> visitSea: node [
 	self visit: node island.
 	
@@ -104,7 +106,7 @@ PP2CommonPrefixVisitor >> visitSea: node [
 	]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2CommonPrefixVisitor >> visitSequence: sequence [
 	| productions |
 

@@ -1,12 +1,14 @@
 Class {
-	#name : #PP2ContextSensitivityCache,
-	#superclass : #PP2ContextSensitivityVisitor,
+	#name : 'PP2ContextSensitivityCache',
+	#superclass : 'PP2ContextSensitivityVisitor',
 	#traits : 'TPP2AnalysisCache',
 	#classTraits : 'TPP2AnalysisCache classTrait',
-	#category : 'PetitParser2-Optimizations'
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #optimizations }
+{ #category : 'optimizations' }
 PP2ContextSensitivityCache >> doPass: node [
 	| children child |
 	self visit: node.
@@ -18,7 +20,7 @@ PP2ContextSensitivityCache >> doPass: node [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2ContextSensitivityCache >> propertySymbol [
 	^ #isContextSensitive
 ]

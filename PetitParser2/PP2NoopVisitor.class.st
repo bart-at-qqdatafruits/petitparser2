@@ -2,38 +2,40 @@
 Traverses all PP2Nodes, takes care about recursive sub-structures.
 "
 Class {
-	#name : #PP2NoopVisitor,
-	#superclass : #PP2NodeVisitor,
+	#name : 'PP2NoopVisitor',
+	#superclass : 'PP2NodeVisitor',
 	#instVars : [
 		'closeSet',
 		'cache',
 		'openSet',
 		'openStack'
 	],
-	#category : 'PetitParser2-Core'
+	#category : 'PetitParser2-Core',
+	#package : 'PetitParser2',
+	#tag : 'Core'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 PP2NoopVisitor >> afterAccept: context result: result [
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 PP2NoopVisitor >> beforeAccept: context [
 ]
 
-{ #category : #caching }
+{ #category : 'caching' }
 PP2NoopVisitor >> cacheResult: anObject for: context [
 	cache at: context ifPresent: [ self error: 'already cached' ].
 	
 	cache at: context put: anObject
 ]
 
-{ #category : #caching }
+{ #category : 'caching' }
 PP2NoopVisitor >> cachedResultFor: context [
 	^ cache at: context 
 ]
 
-{ #category : #'visiting - utilities' }
+{ #category : 'visiting - utilities' }
 PP2NoopVisitor >> close: context [
 	self assert: (self isOpened: context).
 	self assert: (self isClosed: context) not.
@@ -44,24 +46,24 @@ PP2NoopVisitor >> close: context [
 	closeSet add: context.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NoopVisitor >> closedSet [
 	^ closeSet 
 ]
 
-{ #category : #caching }
+{ #category : 'caching' }
 PP2NoopVisitor >> context: node [
 	^ PP2NoopContext new
 		node: node;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NoopVisitor >> currentContext [
 	^ openStack top
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PP2NoopVisitor >> initialize [
 	cache := Dictionary new.
 	openSet := Set new.
@@ -71,64 +73,64 @@ PP2NoopVisitor >> initialize [
 	openStack := Stack with: self rootContext.
 ]
 
-{ #category : #'visiting - utilities' }
+{ #category : 'visiting - utilities' }
 PP2NoopVisitor >> isClosed: context [
 	^ closeSet includes: context 
 ]
 
-{ #category : #'visiting - utilities' }
+{ #category : 'visiting - utilities' }
 PP2NoopVisitor >> isOpened: context [
 	^ openSet includes: context 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NoopVisitor >> isRoot [
 	"(rootContext : currentContext)"
 	^ openStack size = 2
 ]
 
-{ #category : #'visiting - utilities' }
+{ #category : 'visiting - utilities' }
 PP2NoopVisitor >> nodeClosed: aPP2Parser [
 	"nothing to do"
 ]
 
-{ #category : #'visiting - utilities' }
+{ #category : 'visiting - utilities' }
 PP2NoopVisitor >> nodeOpened: aPP2Parser [
 	"nothing to do"
 ]
 
-{ #category : #'visiting - utilities' }
+{ #category : 'visiting - utilities' }
 PP2NoopVisitor >> open: context [
 	self assert: (self isOpened: context) not.
 	openSet add: context.
 	openStack push: context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NoopVisitor >> openSet [
 	^ openSet
 ]
 
-{ #category : #'loop control' }
+{ #category : 'loop control' }
 PP2NoopVisitor >> openedResultFor: context [
 	^ #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2NoopVisitor >> parentContext [	
 	
 	"(rootContext : ... : parentContext : currentContext)"
 	^ openStack at: 2
 ]
 
-{ #category : #caching }
+{ #category : 'caching' }
 PP2NoopVisitor >> rootContext [
 	^ PP2NoopContext new
 		node: nil;
 		yourself
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2NoopVisitor >> visit: node [
 	| result context |
 	context := self context: node.
@@ -153,7 +155,7 @@ PP2NoopVisitor >> visit: node [
 	^ result
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 PP2NoopVisitor >> visitPP2Node: node [
 	node children do: [ :child | self visit: child ]	
 ]

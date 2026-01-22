@@ -1,14 +1,16 @@
 Class {
-	#name : #PP2RecognizerContext,
-	#superclass : #PP2NoopContext,
+	#name : 'PP2RecognizerContext',
+	#superclass : 'PP2NoopContext',
 	#instVars : [
 		'inToken',
 		'parent'
 	],
-	#category : 'PetitParser2-Optimizations'
+	#category : 'PetitParser2-Optimizations',
+	#package : 'PetitParser2',
+	#tag : 'Optimizations'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2RecognizerContext >> = anotherContext [
 	super = anotherContext ifFalse: [ ^ false ]	.
 
@@ -18,27 +20,27 @@ PP2RecognizerContext >> = anotherContext [
 	^ true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 PP2RecognizerContext >> hash [
 	^ super hash bitXor: (self inToken hash bitXor: self parent identityHash)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecognizerContext >> inToken [
 	^ inToken
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecognizerContext >> inToken: anObject [
 	inToken := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecognizerContext >> parent [
 	^ parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PP2RecognizerContext >> parent: anObject [
 	parent := anObject
 ]
