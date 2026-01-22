@@ -173,11 +173,6 @@ PP2NextSetsVisitor >> visitOptional: node [
 ]
 
 { #category : 'visiting' }
-PP2NextSetsVisitor >> visitPP2Node: node [
-	self error: 'should provide specific implementation'
-]
-
-{ #category : 'visiting' }
 PP2NextSetsVisitor >> visitPop: node [
 	^ self visitDelegate: node
 ]
